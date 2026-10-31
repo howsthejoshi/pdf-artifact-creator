@@ -4,7 +4,8 @@
     "customers.csv",
     "loan_accounts.csv",
     "bureau_credit.csv",
-    "collections_events.csv"
+    "collections_events.csv",
+    "repayment_history.csv"
   ],
   "n_accounts": 14685,
   "n_customers": 10000,

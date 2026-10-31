@@ -38,6 +38,7 @@ def build_facts(panel: pd.DataFrame) -> dict:
             "loan_accounts.csv",
             "bureau_credit.csv",
             "collections_events.csv",
+            "repayment_history.csv",
         ],
         "n_accounts": int(n),
         "n_customers": int(panel["customer_id"].nunique()),
