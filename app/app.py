@@ -65,6 +65,8 @@ def apply_filters(df: pd.DataFrame) -> pd.DataFrame:
     sel_em = st.sidebar.multiselect("Employment", emps, default=emps)
     out = df[df["loan_type"].isin(sel_lt) & df["region"].isin(sel_rg) & df["employment_type"].isin(sel_em)]
     st.sidebar.caption(f"{len(out):,} of {len(df):,} accounts")
+    st.sidebar.divider()
+    st.sidebar.markdown("**Ask the Portfolio** is the fourth tab. Use the **Ask now** button there.")
     return out
 
 
@@ -218,9 +220,59 @@ def anomaly_view(df: pd.DataFrame, flags: pd.DataFrame, meta: dict) -> None:
         st.rerun()
 
 
+def _submit_question(question: str) -> None:
+    q = (question or "").strip()
+    if not q:
+        st.warning("Type a question first.")
+        return
+    result = ask(q)
+    prefix = "" if not result["declined"] else "Declined. "
+    st.session_state.chat.append({"role": "user", "content": q})
+    st.session_state.chat.append(
+        {"role": "assistant", "content": prefix + result["answer"], "source": result.get("source")}
+    )
+
+
 def ask_view() -> None:
     st.subheader("Ask the Portfolio")
-    with st.expander("What triggers it, errors, and the human step", expanded=True):
+    st.markdown("Type a question about **this book**, then click **Ask now**. Answers use dashboard facts only.")
+    if "chat" not in st.session_state:
+        st.session_state.chat = []
+    if "ask_box" not in st.session_state:
+        st.session_state.ask_box = ""
+
+    examples = [
+        "Which loan type has the highest default rate?",
+        "What is the portfolio default rate?",
+        "Which employment type is riskiest?",
+    ]
+    e1, e2, e3 = st.columns(3)
+    for col, text in zip((e1, e2, e3), examples):
+        if col.button(text, key=f"ex_{text[:12]}"):
+            st.session_state.ask_box = text
+            _submit_question(text)
+            st.rerun()
+
+    st.text_area(
+        "Your question",
+        key="ask_box",
+        height=90,
+        placeholder="e.g. Which loan type has the highest default rate?",
+    )
+    if st.button("Ask now", type="primary", use_container_width=True):
+        _submit_question(st.session_state.ask_box)
+        st.rerun()
+
+    if not st.session_state.chat:
+        st.info("No questions yet. Use a sample above or type your own and click Ask now.")
+
+    for turn in st.session_state.chat:
+        with st.chat_message(turn["role"]):
+            st.write(turn["content"])
+            if turn.get("source"):
+                st.caption(turn["source"])
+
+    with st.expander("What triggers it, errors, and the human step"):
         st.markdown(
             """
 - **Trigger:** the analyst submits a natural-language question. The app answers from pre-computed
@@ -231,22 +283,6 @@ def ask_view() -> None:
 - **Human-in-the-loop:** check the cited grouping against the Portfolio tab before changing policy.
 """
         )
-    if "chat" not in st.session_state:
-        st.session_state.chat = []
-    for turn in st.session_state.chat:
-        with st.chat_message(turn["role"]):
-            st.write(turn["content"])
-            if turn.get("source"):
-                st.caption(turn["source"])
-    q = st.chat_input("e.g. Which loan type has the highest default rate?")
-    if q:
-        result = ask(q)
-        st.session_state.chat.append({"role": "user", "content": q})
-        prefix = "" if not result["declined"] else "Declined. "
-        st.session_state.chat.append(
-            {"role": "assistant", "content": prefix + result["answer"], "source": result.get("source")}
-        )
-        st.rerun()
 
 
 def main() -> None:
