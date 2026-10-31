@@ -1,0 +1,77 @@
+[
+  {
+    "step": "standardise_gender",
+    "n": 600,
+    "rule": "Map M\u2192Male and F\u2192Female; keep Male/Female. Do not drop rows."
+  },
+  {
+    "step": "impute_years_employed",
+    "n": 500,
+    "rule": "median within employment_type; rows retained"
+  },
+  {
+    "step": "impute_num_dependents",
+    "n": 500,
+    "rule": "global median; rows retained"
+  },
+  {
+    "step": "impute_years_at_residence",
+    "n": 500,
+    "rule": "global median; rows retained"
+  },
+  {
+    "step": "dedupe_customers",
+    "dropped": 0,
+    "keep": "first"
+  },
+  {
+    "step": "impute_interest_rate",
+    "n": 294,
+    "rule": "median within loan_type; rows retained"
+  },
+  {
+    "step": "drop_unusable_loans",
+    "n": 0,
+    "rule": "only drop if target, id or amount unusable"
+  },
+  {
+    "step": "dedupe_accounts",
+    "dropped": 0,
+    "keep": "first"
+  },
+  {
+    "step": "impute_bureau_dpd",
+    "n": 689,
+    "rule": "missing days_past_due treated as 0 (not reported / current); rows retained"
+  },
+  {
+    "step": "collections_clean",
+    "n": 8635,
+    "rule": "no row drops; recoveries clipped at 0"
+  },
+  {
+    "step": "orphan_loans",
+    "n": 0,
+    "rule": "left-join customers; unmatched loans kept with missing demo flags"
+  },
+  {
+    "step": "orphan_collections",
+    "n": 0,
+    "rule": "drop collections whose account_id is not in loan_accounts"
+  },
+  {
+    "step": "bureau_unknown_customer",
+    "n": 0,
+    "rule": "drop bureau lines without a customer"
+  },
+  {
+    "step": "join_logic",
+    "grain": "one row per loan account",
+    "joins": [
+      "loan_accounts LEFT JOIN customers USING customer_id",
+      "LEFT JOIN bureau features aggregated to customer_id (tradelines, utilisation, max DPD, write-offs)",
+      "LEFT JOIN collections features aggregated to account_id",
+      "LEFT JOIN repayment features aggregated to account_id IF repayment_history.csv is present"
+    ]
+  }
+]

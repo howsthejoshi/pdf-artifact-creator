@@ -1,0 +1,8 @@
+.venv/
+.env
+__pycache__/
+.pytest_cache/
+.streamlit/secrets.toml
+*.pyc
+agent-tools/
+data/processed/anomaly_decisions.json

@@ -1,0 +1,658 @@
+{
+  "as_of": "2026-10-31",
+  "source_tables": [
+    "customers.csv",
+    "loan_accounts.csv",
+    "bureau_credit.csv",
+    "collections_events.csv"
+  ],
+  "n_accounts": 14685,
+  "n_customers": 10000,
+  "n_defaults": 2364,
+  "portfolio_default_rate": 0.161,
+  "total_exposure": 601119531.64,
+  "avg_loan_amount": 40934.25,
+  "avg_income": 79351.62,
+  "by_loan_type": [
+    {
+      "loan_type": "Mortgage",
+      "accounts": 1432,
+      "defaults": 353,
+      "exposure": 314473751.28,
+      "default_rate": 0.2465,
+      "avg_income": 79321.3
+    },
+    {
+      "loan_type": "Credit Card",
+      "accounts": 3721,
+      "defaults": 603,
+      "exposure": 30016841.99,
+      "default_rate": 0.1621,
+      "avg_income": 79629.48
+    },
+    {
+      "loan_type": "Business Loan",
+      "accounts": 1484,
+      "defaults": 238,
+      "exposure": 99017631.21,
+      "default_rate": 0.1604,
+      "avg_income": 79278.5
+    },
+    {
+      "loan_type": "Personal Loan",
+      "accounts": 5216,
+      "defaults": 777,
+      "exposure": 78815492.74,
+      "default_rate": 0.149,
+      "avg_income": 79454.47
+    },
+    {
+      "loan_type": "Auto Loan",
+      "accounts": 2832,
+      "defaults": 393,
+      "exposure": 78795814.42,
+      "default_rate": 0.1388,
+      "avg_income": 78850.74
+    }
+  ],
+  "by_region": [
+    {
+      "region": "South",
+      "accounts": 3600,
+      "defaults": 607,
+      "exposure": 156267835.11,
+      "default_rate": 0.1686,
+      "avg_income": 79299.22
+    },
+    {
+      "region": "North",
+      "accounts": 3147,
+      "defaults": 515,
+      "exposure": 129432217.9,
+      "default_rate": 0.1636,
+      "avg_income": 78784.4
+    },
+    {
+      "region": "East",
+      "accounts": 2747,
+      "defaults": 440,
+      "exposure": 108206219.11,
+      "default_rate": 0.1602,
+      "avg_income": 80639.53
+    },
+    {
+      "region": "West",
+      "accounts": 2877,
+      "defaults": 455,
+      "exposure": 110901841.61,
+      "default_rate": 0.1582,
+      "avg_income": 78487.77
+    },
+    {
+      "region": "Central",
+      "accounts": 2314,
+      "defaults": 347,
+      "exposure": 96311417.91,
+      "default_rate": 0.15,
+      "avg_income": 79749.65
+    }
+  ],
+  "by_employment_type": [
+    {
+      "employment_type": "Unemployed",
+      "accounts": 718,
+      "defaults": 251,
+      "exposure": 29625522.42,
+      "default_rate": 0.3496,
+      "avg_income": 42019.78
+    },
+    {
+      "employment_type": "Contract",
+      "accounts": 1563,
+      "defaults": 271,
+      "exposure": 61592172.32,
+      "default_rate": 0.1734,
+      "avg_income": 73415.1
+    },
+    {
+      "employment_type": "Self-Employed",
+      "accounts": 3014,
+      "defaults": 462,
+      "exposure": 123373236.86,
+      "default_rate": 0.1533,
+      "avg_income": 79631.85
+    },
+    {
+      "employment_type": "Salaried",
+      "accounts": 7546,
+      "defaults": 1130,
+      "exposure": 313017349.61,
+      "default_rate": 0.1497,
+      "avg_income": 81543.71
+    },
+    {
+      "employment_type": "Business Owner",
+      "accounts": 1844,
+      "defaults": 250,
+      "exposure": 73511250.43,
+      "default_rate": 0.1356,
+      "avg_income": 89490.94
+    }
+  ],
+  "by_income_band": [
+    {
+      "income_band": "<25k",
+      "accounts": 321,
+      "defaults": 127,
+      "exposure": 12262523.86,
+      "default_rate": 0.3956,
+      "avg_income": 17051.4
+    },
+    {
+      "income_band": "25-50k",
+      "accounts": 1527,
+      "defaults": 389,
+      "exposure": 64602699.69,
+      "default_rate": 0.2547,
+      "avg_income": 40746.76
+    },
+    {
+      "income_band": "50-80k",
+      "accounts": 5684,
+      "defaults": 1016,
+      "exposure": 235469228.83,
+      "default_rate": 0.1787,
+      "avg_income": 66893.21
+    },
+    {
+      "income_band": "80-120k",
+      "accounts": 6328,
+      "defaults": 767,
+      "exposure": 255723944.15,
+      "default_rate": 0.1212,
+      "avg_income": 96196.05
+    },
+    {
+      "income_band": "120k+",
+      "accounts": 825,
+      "defaults": 65,
+      "exposure": 33061135.11,
+      "default_rate": 0.0788,
+      "avg_income": 131678.91
+    }
+  ],
+  "by_age_band": [
+    {
+      "age_band": "<=25",
+      "accounts": 1927,
+      "defaults": 427,
+      "exposure": 84237248.15,
+      "default_rate": 0.2216,
+      "avg_income": 71123.87
+    },
+    {
+      "age_band": "26-35",
+      "accounts": 4070,
+      "defaults": 751,
+      "exposure": 171164568.41,
+      "default_rate": 0.1845,
+      "avg_income": 75031.65
+    },
+    {
+      "age_band": "36-45",
+      "accounts": 5097,
+      "defaults": 775,
+      "exposure": 202615054.96,
+      "default_rate": 0.1521,
+      "avg_income": 80931.78
+    },
+    {
+      "age_band": "46-60",
+      "accounts": 3313,
+      "defaults": 391,
+      "exposure": 130336741.78,
+      "default_rate": 0.118,
+      "avg_income": 85748.29
+    },
+    {
+      "age_band": "60+",
+      "accounts": 278,
+      "defaults": 20,
+      "exposure": 12765918.34,
+      "default_rate": 0.0719,
+      "avg_income": 94426.62
+    }
+  ],
+  "by_city_tier": [
+    {
+      "city_tier": "Tier 2",
+      "accounts": 5925,
+      "defaults": 973,
+      "exposure": 249272044.42,
+      "default_rate": 0.1642,
+      "avg_income": 78614.68
+    },
+    {
+      "city_tier": "Tier 3",
+      "accounts": 3588,
+      "defaults": 587,
+      "exposure": 144692124.67,
+      "default_rate": 0.1636,
+      "avg_income": 79994.68
+    },
+    {
+      "city_tier": "Tier 1",
+      "accounts": 5172,
+      "defaults": 804,
+      "exposure": 207155362.55,
+      "default_rate": 0.1555,
+      "avg_income": 79749.73
+    }
+  ],
+  "by_housing_type": [
+    {
+      "housing_type": "Living with Family",
+      "accounts": 2198,
+      "defaults": 381,
+      "exposure": 87100459.01,
+      "default_rate": 0.1733,
+      "avg_income": 79396.5
+    },
+    {
+      "housing_type": "Mortgaged",
+      "accounts": 3729,
+      "defaults": 603,
+      "exposure": 152013484.12,
+      "default_rate": 0.1617,
+      "avg_income": 78356.18
+    },
+    {
+      "housing_type": "Owned",
+      "accounts": 4375,
+      "defaults": 693,
+      "exposure": 181692346.29,
+      "default_rate": 0.1584,
+      "avg_income": 79442.17
+    },
+    {
+      "housing_type": "Rented",
+      "accounts": 4383,
+      "defaults": 687,
+      "exposure": 180313242.22,
+      "default_rate": 0.1567,
+      "avg_income": 80085.63
+    }
+  ],
+  "by_disbursal_channel": [
+    {
+      "disbursal_channel": "Mobile App",
+      "accounts": 3711,
+      "defaults": 627,
+      "exposure": 153322713.98,
+      "default_rate": 0.169,
+      "avg_income": 79540.42
+    },
+    {
+      "disbursal_channel": "Partner/DSA",
+      "accounts": 3680,
+      "defaults": 601,
+      "exposure": 157972959.52,
+      "default_rate": 0.1633,
+      "avg_income": 79330.68
+    },
+    {
+      "disbursal_channel": "Online",
+      "accounts": 3599,
+      "defaults": 567,
+      "exposure": 143883474.17,
+      "default_rate": 0.1575,
+      "avg_income": 79390.11
+    },
+    {
+      "disbursal_channel": "Branch",
+      "accounts": 3695,
+      "defaults": 569,
+      "exposure": 145940383.97,
+      "default_rate": 0.154,
+      "avg_income": 79145.36
+    }
+  ],
+  "by_education_level": [
+    {
+      "education_level": "High School",
+      "accounts": 4169,
+      "defaults": 767,
+      "exposure": 169574631.17,
+      "default_rate": 0.184,
+      "avg_income": 66247.21
+    },
+    {
+      "education_level": "Vocational",
+      "accounts": 1497,
+      "defaults": 255,
+      "exposure": 60093504.73,
+      "default_rate": 0.1703,
+      "avg_income": 69319.37
+    },
+    {
+      "education_level": "Bachelor's",
+      "accounts": 5793,
+      "defaults": 910,
+      "exposure": 238150207.18,
+      "default_rate": 0.1571,
+      "avg_income": 80722.04
+    },
+    {
+      "education_level": "Master's",
+      "accounts": 2648,
+      "defaults": 355,
+      "exposure": 111594547.15,
+      "default_rate": 0.1341,
+      "avg_income": 95812.5
+    },
+    {
+      "education_level": "Doctorate",
+      "accounts": 578,
+      "defaults": 77,
+      "exposure": 21706641.41,
+      "default_rate": 0.1332,
+      "avg_income": 110706.75
+    }
+  ],
+  "cross_employment_loan_type": [
+    {
+      "employment_type": "Unemployed",
+      "loan_type": "Business Loan",
+      "accounts": 80,
+      "default_rate": 0.3875,
+      "exposure": 5104067.1
+    },
+    {
+      "employment_type": "Unemployed",
+      "loan_type": "Credit Card",
+      "accounts": 197,
+      "default_rate": 0.3858,
+      "exposure": 1541700.89
+    },
+    {
+      "employment_type": "Unemployed",
+      "loan_type": "Personal Loan",
+      "accounts": 237,
+      "default_rate": 0.2869,
+      "exposure": 3566946.82
+    },
+    {
+      "employment_type": "Unemployed",
+      "loan_type": "Auto Loan",
+      "accounts": 134,
+      "default_rate": 0.2836,
+      "exposure": 3768074.64
+    },
+    {
+      "employment_type": "Contract",
+      "loan_type": "Mortgage",
+      "accounts": 136,
+      "default_rate": 0.2721,
+      "exposure": 30662086.84
+    },
+    {
+      "employment_type": "Salaried",
+      "loan_type": "Mortgage",
+      "accounts": 751,
+      "default_rate": 0.2357,
+      "exposure": 165470659.36
+    },
+    {
+      "employment_type": "Business Owner",
+      "loan_type": "Mortgage",
+      "accounts": 173,
+      "default_rate": 0.2312,
+      "exposure": 37015295.28
+    },
+    {
+      "employment_type": "Self-Employed",
+      "loan_type": "Mortgage",
+      "accounts": 302,
+      "default_rate": 0.202,
+      "exposure": 65680976.83
+    },
+    {
+      "employment_type": "Contract",
+      "loan_type": "Business Loan",
+      "accounts": 153,
+      "default_rate": 0.1895,
+      "exposure": 10486407.69
+    },
+    {
+      "employment_type": "Contract",
+      "loan_type": "Auto Loan",
+      "accounts": 317,
+      "default_rate": 0.1798,
+      "exposure": 8697169.53
+    },
+    {
+      "employment_type": "Self-Employed",
+      "loan_type": "Business Loan",
+      "accounts": 290,
+      "default_rate": 0.1724,
+      "exposure": 19516952.01
+    },
+    {
+      "employment_type": "Contract",
+      "loan_type": "Credit Card",
+      "accounts": 399,
+      "default_rate": 0.1554,
+      "exposure": 3159371.21
+    },
+    {
+      "employment_type": "Contract",
+      "loan_type": "Personal Loan",
+      "accounts": 558,
+      "default_rate": 0.1541,
+      "exposure": 8587137.05
+    },
+    {
+      "employment_type": "Salaried",
+      "loan_type": "Credit Card",
+      "accounts": 1919,
+      "default_rate": 0.1511,
+      "exposure": 15411944.26
+    },
+    {
+      "employment_type": "Self-Employed",
+      "loan_type": "Personal Loan",
+      "accounts": 1124,
+      "default_rate": 0.1486,
+      "exposure": 16739817.41
+    },
+    {
+      "employment_type": "Business Owner",
+      "loan_type": "Credit Card",
+      "accounts": 461,
+      "default_rate": 0.1475,
+      "exposure": 3887480.97
+    },
+    {
+      "employment_type": "Salaried",
+      "loan_type": "Personal Loan",
+      "accounts": 2631,
+      "default_rate": 0.1437,
+      "exposure": 39751111.76
+    },
+    {
+      "employment_type": "Self-Employed",
+      "loan_type": "Credit Card",
+      "accounts": 745,
+      "default_rate": 0.1436,
+      "exposure": 6016344.66
+    },
+    {
+      "employment_type": "Salaried",
+      "loan_type": "Business Loan",
+      "accounts": 767,
+      "default_rate": 0.1395,
+      "exposure": 51448601.48
+    },
+    {
+      "employment_type": "Self-Employed",
+      "loan_type": "Auto Loan",
+      "accounts": 553,
+      "default_rate": 0.1392,
+      "exposure": 15419145.95
+    },
+    {
+      "employment_type": "Business Owner",
+      "loan_type": "Auto Loan",
+      "accounts": 350,
+      "default_rate": 0.1229,
+      "exposure": 9976391.55
+    },
+    {
+      "employment_type": "Salaried",
+      "loan_type": "Auto Loan",
+      "accounts": 1478,
+      "default_rate": 0.1204,
+      "exposure": 40935032.75
+    },
+    {
+      "employment_type": "Business Owner",
+      "loan_type": "Personal Loan",
+      "accounts": 666,
+      "default_rate": 0.1171,
+      "exposure": 10170479.7
+    },
+    {
+      "employment_type": "Business Owner",
+      "loan_type": "Business Loan",
+      "accounts": 194,
+      "default_rate": 0.1082,
+      "exposure": 12461602.93
+    }
+  ],
+  "cross_income_employment": [
+    {
+      "income_band": "120k+",
+      "employment_type": "Business Owner",
+      "accounts": 196,
+      "default_rate": 0.0867
+    },
+    {
+      "income_band": "120k+",
+      "employment_type": "Salaried",
+      "accounts": 423,
+      "default_rate": 0.0757
+    },
+    {
+      "income_band": "120k+",
+      "employment_type": "Self-Employed",
+      "accounts": 151,
+      "default_rate": 0.0795
+    },
+    {
+      "income_band": "25-50k",
+      "employment_type": "Contract",
+      "accounts": 235,
+      "default_rate": 0.2809
+    },
+    {
+      "income_band": "25-50k",
+      "employment_type": "Salaried",
+      "accounts": 652,
+      "default_rate": 0.2193
+    },
+    {
+      "income_band": "25-50k",
+      "employment_type": "Self-Employed",
+      "accounts": 300,
+      "default_rate": 0.2267
+    },
+    {
+      "income_band": "25-50k",
+      "employment_type": "Unemployed",
+      "accounts": 263,
+      "default_rate": 0.3688
+    },
+    {
+      "income_band": "50-80k",
+      "employment_type": "Business Owner",
+      "accounts": 580,
+      "default_rate": 0.1845
+    },
+    {
+      "income_band": "50-80k",
+      "employment_type": "Contract",
+      "accounts": 713,
+      "default_rate": 0.1683
+    },
+    {
+      "income_band": "50-80k",
+      "employment_type": "Salaried",
+      "accounts": 2968,
+      "default_rate": 0.1728
+    },
+    {
+      "income_band": "50-80k",
+      "employment_type": "Self-Employed",
+      "accounts": 1196,
+      "default_rate": 0.1806
+    },
+    {
+      "income_band": "50-80k",
+      "employment_type": "Unemployed",
+      "accounts": 227,
+      "default_rate": 0.2643
+    },
+    {
+      "income_band": "80-120k",
+      "employment_type": "Business Owner",
+      "accounts": 985,
+      "default_rate": 0.1107
+    },
+    {
+      "income_band": "80-120k",
+      "employment_type": "Contract",
+      "accounts": 532,
+      "default_rate": 0.1297
+    },
+    {
+      "income_band": "80-120k",
+      "employment_type": "Salaried",
+      "accounts": 3445,
+      "default_rate": 0.1239
+    },
+    {
+      "income_band": "80-120k",
+      "employment_type": "Self-Employed",
+      "accounts": 1334,
+      "default_rate": 0.1162
+    },
+    {
+      "income_band": "<25k",
+      "employment_type": "Unemployed",
+      "accounts": 195,
+      "default_rate": 0.4462
+    }
+  ],
+  "insights": [
+    {
+      "title": "Mortgage carries the highest default rate",
+      "so_what": "Mortgage defaults at 24.6% vs Auto Loan at 13.9%. Price and limit unsecured products tighter; keep secured book as the ballast."
+    },
+    {
+      "title": "Unemployed customers are the weakest employment segment",
+      "so_what": "Default rate 35.0% versus Business Owner at 13.6%. Policy should require extra bureau quality or a lower LTI for this segment."
+    },
+    {
+      "title": "Income band <25k has the highest default rate",
+      "so_what": "39.6% default versus 120k+ at 7.9%. Affordability cuts belong in origination, not only collections."
+    },
+    {
+      "title": "Cross-cut: employment \u00d7 loan type concentrates risk",
+      "so_what": "Unemployed Business Loan prints 38.8% default on 80 accounts. That cell should be on the watchlist, not averaged away."
+    },
+    {
+      "title": "South is the weakest region",
+      "so_what": "South defaults at 16.9% vs Central at 15.0%. Check local underwriting and collections coverage before raising regional limits."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "question": "Which loan type has the highest default rate?",
+    "declined": false,
+    "answer": "Mortgage has the highest default rate at 24.6% on 1,432 accounts (353 defaults), exposure $314,473,751.",
+    "source": "analysis panel grouped by loan_type"
+  },
+  {
+    "question": "What is the portfolio default rate?",
+    "declined": false,
+    "answer": "Portfolio default rate is 16.1% (2,364 defaults / 14,685 accounts).",
+    "source": "loan_accounts.target_default"
+  },
+  {
+    "question": "Which employment type is riskiest?",
+    "declined": false,
+    "answer": "Unemployed has the highest default rate at 35.0% on 718 accounts (251 defaults), exposure $29,625,522.",
+    "source": "analysis panel grouped by employment_type"
+  },
+  {
+    "question": "What will GDP be next year?",
+    "declined": true,
+    "answer": "I cannot answer that from the dashboard tables. I only know the joined customers, loans, bureau and collections facts.",
+    "source": null
+  }
+]

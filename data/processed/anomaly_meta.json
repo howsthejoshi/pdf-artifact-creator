@@ -1,0 +1,7 @@
+{
+  "n_flagged": 200,
+  "trigger": "IsolationForest contamination 3% on bureau/collections/loan features, plus peer z>=2 on DPD or write-off rate",
+  "false_positive": "A high-limit mortgage with temporarily high utilisation after a top-up, still paying on time.",
+  "false_negative": "A recently originated account with only one or two EMI months, still looking current, that will miss from month three \u2014 the detector has too little history.",
+  "human_step": "Analyst opens the account, confirms or dismisses, and that decision is stored for QA."
+}
