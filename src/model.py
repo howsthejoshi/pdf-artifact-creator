@@ -111,7 +111,7 @@ def train(panel: pd.DataFrame) -> dict:
             ("pre", pre),
             (
                 "clf",
-                LogisticRegression(max_iter=2000, class_weight="balanced", random_state=42),
+                LogisticRegression(max_iter=2000, random_state=42),
             ),
         ]
     )
@@ -126,7 +126,6 @@ def train(panel: pd.DataFrame) -> dict:
         subsample=0.8,
         colsample_bytree=0.8,
         random_state=42,
-        class_weight="balanced",
         verbosity=-1,
     )
     gbm.fit(train_df[features], y_train, categorical_feature=CAT_FEATURES)

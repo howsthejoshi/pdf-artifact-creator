@@ -3,75 +3,75 @@
   "n_test": 3672,
   "test_default_rate": 0.1609,
   "logistic": {
-    "auc": 0.6677,
-    "ks": 0.2481,
-    "gini": 0.3355
+    "auc": 0.6672,
+    "ks": 0.247,
+    "gini": 0.3344
   },
   "lightgbm": {
-    "auc": 0.6603,
-    "ks": 0.2399,
-    "gini": 0.3206
+    "auc": 0.6585,
+    "ks": 0.2459,
+    "gini": 0.3171
   },
   "feature_importance": [
     {
       "feature": "loan_age_months",
-      "importance": 601
-    },
-    {
-      "feature": "interest_rate_pct",
-      "importance": 546
+      "importance": 619
     },
     {
       "feature": "loan_amount",
-      "importance": 537
-    },
-    {
-      "feature": "years_employed",
-      "importance": 528
-    },
-    {
-      "feature": "years_at_residence",
-      "importance": 518
-    },
-    {
-      "feature": "annual_income",
-      "importance": 514
+      "importance": 583
     },
     {
       "feature": "relationship_years",
-      "importance": 507
+      "importance": 577
+    },
+    {
+      "feature": "years_employed",
+      "importance": 543
+    },
+    {
+      "feature": "interest_rate_pct",
+      "importance": 533
+    },
+    {
+      "feature": "annual_income",
+      "importance": 510
     },
     {
       "feature": "repay_mean_dpd",
-      "importance": 455
-    },
-    {
-      "feature": "bureau_utilisation",
-      "importance": 431
+      "importance": 493
     },
     {
       "feature": "age",
-      "importance": 421
+      "importance": 452
+    },
+    {
+      "feature": "years_at_residence",
+      "importance": 444
+    },
+    {
+      "feature": "bureau_utilisation",
+      "importance": 406
     },
     {
       "feature": "repay_max_dpd",
-      "importance": 369
+      "importance": 344
     },
     {
       "feature": "bureau_mean_dpd",
-      "importance": 346
+      "importance": 335
     },
     {
       "feature": "bureau_max_dpd",
-      "importance": 303
-    },
-    {
-      "feature": "tenure_months",
-      "importance": 157
+      "importance": 290
     },
     {
       "feature": "repay_late",
-      "importance": 148
+      "importance": 143
+    },
+    {
+      "feature": "city_tier",
+      "importance": 139
     }
   ],
   "monitoring": {
