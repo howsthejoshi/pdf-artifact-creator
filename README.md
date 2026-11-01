@@ -14,6 +14,32 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 Open `http://127.0.0.1:8512`.
 
+## Host on Streamlit Community Cloud
+
+Streamlit Cloud **only deploys from GitHub**. Push this repo to GitHub first (see below), then:
+
+1. Open **https://share.streamlit.io** and sign in with the **howsthejoshi** GitHub account.
+2. **Create app** / **New app**.
+3. Fill in:
+   - **Repository:** `howsthejoshi/pdf-artifact-creator`
+   - **Branch:** `main`
+   - **Main file path:** `app/app.py`
+   - **App URL** (optional): e.g. `credit-risk-monitor`
+4. **Advanced settings**
+   - Python: **3.12**
+   - Secrets (paste this, with your real Groq key):
+
+```toml
+GROQ_API_KEY = "gsk_your_key_here"
+GROQ_MODEL = "openai/gpt-oss-20b"
+```
+
+5. Click **Deploy**. First build takes a few minutes (LightGBM + parquet).
+
+The public URL will look like `https://credit-risk-monitor.streamlit.app`. Keep it live 14 days after you submit the assignment.
+
+Do **not** put the Groq key in the GitHub repo. Cloud secrets stay on Streamlit only.
+
 ## Ask now (LangGraph)
 
 `src/ask_graph.py` is the chatbot. Flow: **load facts → classify → retrieve evidence → LLM generate → number check → retry or local fallback**.

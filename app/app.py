@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -19,6 +20,14 @@ from src.ask_portfolio import ask  # noqa: E402
 from src.paths import PROCESSED_DIR  # noqa: E402
 
 st.set_page_config(page_title="Credit Risk Portfolio Monitor", layout="wide")
+
+for _key in ("GROQ_API_KEY", "GROQ_MODEL", "GEMINI_API_KEY", "OPENAI_API_KEY", "OPENAI_MODEL"):
+    try:
+        _val = st.secrets.get(_key)
+    except Exception:
+        _val = None
+    if _val:
+        os.environ[_key] = str(_val).strip()
 
 DECISIONS_PATH = PROCESSED_DIR / "anomaly_decisions.json"
 
