@@ -14,11 +14,18 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 Open `http://127.0.0.1:8512`.
 
-## LLM key
+## Ask now (LangGraph)
 
-Copy `.env.example` to `.env` and set `OPENAI_API_KEY` if you want the hosted-model phrasing. The dashboard also reads Streamlit secrets of the same name.
+`src/ask_graph.py` is the chatbot. Flow: **load facts → classify → retrieve evidence → LLM generate → number check → retry or local fallback**.
 
-If no key is set, Ask the Portfolio still answers from `data/processed/facts.json` (grouped rates and totals only) and **declines** questions those facts cannot support. It does not invent numbers. No account-level rows are sent to an LLM when a key is present.
+Free LLM: **Groq `llama-3.1-8b-instant`**. Create a key at https://console.groq.com (no card), then:
+
+```bash
+cp .env.example .env
+# set GROQ_API_KEY=gsk_...
+```
+
+If no key is set, the generate node still answers from `data/processed/facts.json` and declines questions the book cannot support. Account-level rows are never sent to an API.
 
 ## Where the brief lives
 
@@ -29,7 +36,7 @@ If no key is set, Ask the Portfolio still answers from `data/processed/facts.jso
 | Portfolio analytics / insights | `src/analytics.py` |
 | Logistic + LightGBM, AUC/KS/Gini | `src/model.py`, `models/metrics.json` |
 | Anomaly detection | `src/anomaly.py` |
-| Ask the Portfolio | `src/ask_portfolio.py` |
+| Ask the Portfolio | `src/ask_graph.py`, `src/ask_portfolio.py` |
 | Dashboard | `app/app.py` |
 | Architecture (1 page) | `docs/architecture.pdf` |
 | Solution overview (1 page) | `docs/solution_overview.pdf` |

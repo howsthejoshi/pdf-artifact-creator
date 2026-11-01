@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 import re
 from typing import Any
 
@@ -128,58 +127,7 @@ def answer_local(question: str, facts: dict[str, Any]) -> dict[str, Any]:
     return declined
 
 
-def answer_llm(question: str, facts: dict[str, Any]) -> dict[str, Any] | None:
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    if not api_key:
-        return None
-    try:
-        from openai import OpenAI
+def ask(question: str, history: list[dict[str, str]] | None = None) -> dict[str, Any]:
+    from src.ask_graph import run_ask
 
-        client = OpenAI(api_key=api_key)
-        model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-        slim = {
-            k: facts[k]
-            for k in [
-                "n_accounts",
-                "n_customers",
-                "n_defaults",
-                "portfolio_default_rate",
-                "total_exposure",
-                "by_loan_type",
-                "by_region",
-                "by_employment_type",
-                "by_income_band",
-                "by_age_band",
-                "cross_employment_loan_type",
-            ]
-        }
-        resp = client.chat.completions.create(
-            model=model,
-            temperature=0,
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a credit-risk analyst assistant. Answer ONLY with numbers in the JSON facts. "
-                        "If the facts do not contain the answer, say you cannot answer and do not guess. "
-                        "Cite which grouping the number came from. Keep to 3 sentences."
-                    ),
-                },
-                {"role": "user", "content": f"FACTS:\n{json.dumps(slim)}\n\nQUESTION:\n{question}"},
-            ],
-        )
-        text = resp.choices[0].message.content.strip()
-        declined = "cannot answer" in text.lower() or "do not contain" in text.lower()
-        return {"declined": declined, "answer": text, "source": "facts.json via LLM (no raw customer rows sent)"}
-    except Exception as exc:  # noqa: BLE001 — surface to UI, fall back locally
-        local = answer_local(question, facts)
-        local["answer"] = f"(LLM error: {exc}) " + local["answer"]
-        return local
-
-
-def ask(question: str) -> dict[str, Any]:
-    facts = load_facts()
-    llm = answer_llm(question, facts)
-    if llm is not None:
-        return llm
-    return answer_local(question, facts)
+    return run_ask(question, history=history)

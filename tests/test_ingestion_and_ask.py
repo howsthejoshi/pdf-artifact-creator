@@ -1,3 +1,4 @@
+from src.ask_graph import evidence_for, run_ask, validate_answer_numbers
 from src.ask_portfolio import answer_local
 from src.ingestion import clean_customers, clean_loans
 from src.model import gini_from_auc, ks_statistic
@@ -101,3 +102,19 @@ def test_ask_uses_facts_and_declines_unknown():
     assert "Personal Loan" in hit["answer"]
     miss = answer_local("What will GDP be next year?", facts)
     assert miss["declined"] is True
+
+
+def test_graph_declines_gdp_and_answers_loan_type():
+    hit = run_ask("Which loan type has the highest default rate?")
+    assert hit["declined"] is False
+    assert "Mortgage" in hit["answer"]
+    assert "24.6%" in hit["answer"]
+    miss = run_ask("What will GDP be next year?")
+    assert miss["declined"] is True
+    assert miss["engine"] == "rules"
+
+
+def test_number_validator_rejects_hallucinated_rate():
+    evidence = evidence_for("loan type", {"n_accounts": 10, "portfolio_default_rate": 0.161, "by_loan_type": [{"loan_type": "Mortgage", "default_rate": 0.2465, "accounts": 1432, "defaults": 353, "exposure": 100.0, "avg_income": 1}]})
+    assert validate_answer_numbers("Mortgage defaults at 24.6% on 1,432 accounts.", evidence) is None
+    assert validate_answer_numbers("Mortgage defaults at 91.0%.", evidence) is not None
