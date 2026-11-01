@@ -18,7 +18,7 @@ Open `http://127.0.0.1:8512`.
 
 `src/ask_graph.py` is the chatbot. Flow: **load facts → classify → retrieve evidence → LLM generate → number check → retry or local fallback**.
 
-Free LLM: **Groq `llama-3.1-8b-instant`**. Create a key at https://console.groq.com (no card), then:
+Free LLM: **Groq `openai/gpt-oss-20b`**. Create a key at https://console.groq.com (no card), then:
 
 ```bash
 cp .env.example .env

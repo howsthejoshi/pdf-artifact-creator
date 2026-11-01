@@ -251,7 +251,7 @@ def ask_view() -> None:
     else:
         st.caption(
             "LangGraph agent · no free LLM key set, so the generate node uses the local fact retriever. "
-            "Add a free `GROQ_API_KEY` in `.env` to use Llama 3.1 8B on Groq."
+            "Add a free `GROQ_API_KEY` in `.env` to use Groq (`openai/gpt-oss-20b`)."
         )
     st.markdown("Type a question about **this book**, then click **Ask now**.")
     if "chat" not in st.session_state:
@@ -294,7 +294,7 @@ def ask_view() -> None:
         st.markdown(
             """
 - **Trigger:** Ask now runs a LangGraph (`load → classify → retrieve → generate → validate`).
-  Generate uses Groq Llama 3.1 8B Instant when `GROQ_API_KEY` is set (free tier), else Gemini or OpenAI
+  Generate uses Groq `openai/gpt-oss-20b` when `GROQ_API_KEY` is set (free tier), else Gemini or OpenAI
   if those keys exist. Only grouped `facts.json` is sent — never account rows.
 - **False positive:** a fluent LLM answer with a rate not in the tables. The validate node rejects it
   and either retries or falls back to the local retriever.

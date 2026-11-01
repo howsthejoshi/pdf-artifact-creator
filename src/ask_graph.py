@@ -16,7 +16,7 @@ from src.paths import ROOT
 
 load_dotenv(ROOT / ".env")
 
-GROQ_MODEL_DEFAULT = "llama-3.1-8b-instant"
+GROQ_MODEL_DEFAULT = "openai/gpt-oss-20b"
 GEMINI_MODEL_DEFAULT = "gemini-2.0-flash"
 OPENAI_MODEL_DEFAULT = "gpt-4o-mini"
 MAX_RETRIES = 2
@@ -134,6 +134,7 @@ def allowed_numbers(evidence: dict[str, Any]) -> dict[str, set[str]]:
         if isinstance(obj, float):
             if key and "rate" in key:
                 pcts.add(f"{obj * 100:.1f}")
+                pcts.add(f"{obj * 100:.2f}")
                 pcts.add(f"{obj * 100:.0f}")
             if key and ("exposure" in (key or "") or "amount" in (key or "") or "income" in (key or "")):
                 money.add(f"{obj:,.0f}")
