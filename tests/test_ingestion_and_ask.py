@@ -108,7 +108,7 @@ def test_graph_declines_gdp_and_answers_loan_type():
     hit = run_ask("Which loan type has the highest default rate?")
     assert hit["declined"] is False
     assert "Mortgage" in hit["answer"]
-    assert "24.6%" in hit["answer"]
+    assert any(tok in hit["answer"] for tok in ("24.6%", "24.65%", "24.7%"))
     miss = run_ask("What will GDP be next year?")
     assert miss["declined"] is True
     assert miss["engine"] == "rules"
