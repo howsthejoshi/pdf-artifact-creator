@@ -7,10 +7,6 @@ streamlit==1.40.1
 python-dotenv==1.0.1
 joblib==1.4.2
 pyarrow==17.0.0
-reportlab==4.2.5
-pytest==8.3.3
-openai==1.54.4
-matplotlib==3.9.2
 langgraph==0.2.60
 langchain-core==0.3.28
 groq==0.13.1

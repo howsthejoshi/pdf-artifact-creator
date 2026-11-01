@@ -7,7 +7,7 @@ Python **3.12.3**.
 ## Run (three commands)
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
 .venv/bin/python scripts/build.py
 .venv/bin/streamlit run app/app.py --server.port 8512 --server.address 0.0.0.0
 ```
@@ -34,7 +34,9 @@ GROQ_API_KEY = "gsk_your_key_here"
 GROQ_MODEL = "openai/gpt-oss-20b"
 ```
 
-5. Click **Deploy**. First build takes a few minutes (LightGBM + parquet).
+5. Click **Deploy**. Use **Python 3.11** (Advanced settings). Do not use 3.13 — pandas will compile from source and sit on “Your app is in the oven” for a very long time.
+
+If a deploy is already stuck compiling pandas, **reboot** the app with Python **3.11**.
 
 The public URL will look like `https://credit-risk-monitor.streamlit.app`. Keep it live 14 days after you submit the assignment.
 
