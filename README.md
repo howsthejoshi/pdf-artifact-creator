@@ -1,10 +1,50 @@
 # Credit Risk Portfolio Monitor
 
-Working take-home for the v2 brief: ingest five bank tables, profile the book, score default risk, and serve a Streamlit monitor with **Ask the Portfolio** and **anomaly review**.
+Working take-home (v2): ingest the five provided bank tables, profile the book, score default risk, and serve a Streamlit monitor with **Ask the Portfolio** (LangGraph + Groq) and **anomaly review**.
 
-Python **3.12.3**.
+| | |
+|---|---|
+| **GitHub** | https://github.com/howsthejoshi/pdf-artifact-creator |
+| **Hosted app** | Streamlit Community Cloud, deployed from that GitHub `main` branch, entry file `app/app.py` |
+| **Docs** | [`docs/architecture.pdf`](docs/architecture.pdf) · [`docs/solution_overview.pdf`](docs/solution_overview.pdf) |
 
-## Run (three commands)
+Open the **Cloud app URL** from https://share.streamlit.io (your app’s `*.streamlit.app` link). That is the submission hosted dashboard — not localhost.
+
+Python **3.11** on Streamlit Cloud (required). Locally, 3.11 or 3.12.
+
+## What the app does
+
+- **Portfolio** — KPIs, default by product/region, employment × loan heatmap, predicted risk bands. Sidebar filters apply to every tab.
+- **Account** — lookup by `account_id`: PD, risk band, bureau / repayment / collections drivers.
+- **Anomalies** — 200-account review queue with reasons; confirm or dismiss.
+- **Ask the Portfolio** — LangGraph over `facts.json`. Groq `openai/gpt-oss-20b` when `GROQ_API_KEY` is set; otherwise a local retriever. Off-topic questions are declined. No account rows are sent to an API.
+
+Book snapshot (as-of 2026-10-31): 10,000 customers, 14,685 accounts, **16.1%** observed default, **$601.1m** original-balance exposure.
+
+Champion model: **logistic** test AUC **0.667** / KS **0.247** / Gini **0.334**. LightGBM is the challenger (Gini 0.317).
+
+## Streamlit Community Cloud (reviewers)
+
+Already deployed from GitHub. If you need to recreate it:
+
+1. https://share.streamlit.io → sign in with GitHub.
+2. **Create app**
+   - Repository: `howsthejoshi/pdf-artifact-creator`
+   - Branch: `main`
+   - Main file path: **`app/app.py`**
+3. **Advanced settings → Python version → 3.11** (do not use 3.13; pandas will compile from source and hang on “in the oven”).
+4. **Secrets** (never commit these):
+
+```toml
+GROQ_API_KEY = "gsk_your_key_here"
+GROQ_MODEL = "openai/gpt-oss-20b"
+```
+
+5. **Deploy**, then **Reboot** after saving secrets.
+
+If Ask now shows `local_retriever`, the secret is missing — add it and reboot. Do not put `.env` on GitHub.
+
+## Run locally (optional)
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
@@ -12,48 +52,20 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
 .venv/bin/streamlit run app/app.py --server.port 8512 --server.address 0.0.0.0
 ```
 
-Open `http://127.0.0.1:8512`.
-
-## Host on Streamlit Community Cloud
-
-Streamlit Cloud **only deploys from GitHub**. Push this repo to GitHub first (see below), then:
-
-1. Open **https://share.streamlit.io** and sign in with the **howsthejoshi** GitHub account.
-2. **Create app** / **New app**.
-3. Fill in:
-   - **Repository:** `howsthejoshi/pdf-artifact-creator`
-   - **Branch:** `main`
-   - **Main file path:** `app/app.py`
-   - **App URL** (optional): e.g. `credit-risk-monitor`
-4. **Advanced settings**
-   - Python: **3.12**
-   - Secrets (paste this, with your real Groq key):
-
-```toml
-GROQ_API_KEY = "gsk_your_key_here"
-GROQ_MODEL = "openai/gpt-oss-20b"
-```
-
-5. Click **Deploy**. Use **Python 3.11** (Advanced settings). Do not use 3.13 — pandas will compile from source and sit on “Your app is in the oven” for a very long time.
-
-If a deploy is already stuck compiling pandas, **reboot** the app with Python **3.11**.
-
-The public URL will look like `https://credit-risk-monitor.streamlit.app`. Keep it live 14 days after you submit the assignment.
-
-Do **not** put the Groq key in the GitHub repo. Cloud secrets stay on Streamlit only.
-
-## Ask now (LangGraph)
-
-`src/ask_graph.py` is the chatbot. Flow: **load facts → classify → retrieve evidence → LLM generate → number check → retry or local fallback**.
-
-Free LLM: **Groq `openai/gpt-oss-20b`**. Create a key at https://console.groq.com (no card), then:
+Then http://127.0.0.1:8512 for development only.
 
 ```bash
 cp .env.example .env
-# set GROQ_API_KEY=gsk_...
+# set GROQ_API_KEY
 ```
 
-If no key is set, the generate node still answers from `data/processed/facts.json` and declines questions the book cannot support. Account-level rows are never sent to an API.
+## Ask now (LangGraph)
+
+`src/ask_graph.py`: **load facts → classify → retrieve → generate → validate numbers → retry or local fallback**.
+
+Temperature 0. Payload is grouped rates from `data/processed/facts.json` plus the question. GDP / forecasts / PII / raw `ACC…` ids are declined.
+
+Try: “Which loan type has the highest default rate?” (Mortgage ~24.6%) · “What is the portfolio default rate?” (16.1%) · “What will GDP be next year?” (declined).
 
 ## Where the brief lives
 
@@ -70,6 +82,4 @@ If no key is set, the generate node still answers from `data/processed/facts.jso
 | Solution overview (1 page) | `docs/solution_overview.pdf` |
 | Tests | `tests/` |
 
-`repayment_history.csv` is the 7.6 MB monthly tape (176,220 rows), downloaded into `data/raw/` with the other four CSVs from the pack.
-
-A grounded Q&A sample (for wiring an evaluator script) is in `sample_output/ask_portfolio_example.json`.
+`repayment_history.csv` is the monthly tape (176,220 rows) in `data/raw/` with the other four CSVs. Sample grounded Q&A: `sample_output/ask_portfolio_example.json`.
