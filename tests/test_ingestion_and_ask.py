@@ -143,9 +143,9 @@ def test_cross_join_filtered_cell():
     q = "How many salaried customers have a mortgage in the South?"
     spec = parse_spec(q)
     assert spec is not None
-    assert spec["filters"]["employment_type"] == "Salaried"
-    assert spec["filters"]["loan_type"] == "Mortgage"
-    assert spec["filters"]["region"] == "South"
+    assert spec["filters"]["employment_type"] == ["Salaried"]
+    assert spec["filters"]["loan_type"] == ["Mortgage"]
+    assert spec["filters"]["region"] == ["South"]
     assert spec["group_by"] == []
 
     result = run_cross(q)
@@ -156,6 +156,32 @@ def test_cross_join_filtered_cell():
     assert hit["declined"] is False
     assert str(row["customers"]) in hit["answer"]
     assert str(row["accounts"]) in hit["answer"]
+
+
+def test_multi_product_defaulted_cell():
+    from src.ask_portfolio import answer_local, load_facts
+    from src.cross_query import parse_spec, run_cross
+
+    q = "how many contract people in west region have defaulted in their mortgage and personal loan"
+    spec = parse_spec(q)
+    assert spec is not None
+    assert spec["filters"]["employment_type"] == ["Contract"]
+    assert spec["filters"]["region"] == ["West"]
+    assert set(spec["filters"]["loan_type"]) == {"Mortgage", "Personal Loan"}
+    assert spec["defaulted_only"] is True
+
+    result = run_cross(q)
+    assert result and result["table"]
+    top = result["table"][0]
+    assert top["customers"] == 23
+    assert top["accounts"] == 23
+
+    hit = answer_local(q, load_facts())
+    assert hit["declined"] is False
+    assert "23" in hit["answer"]
+    assert "Mortgage" in hit["answer"]
+    assert "Personal Loan" in hit["answer"]
+    assert "106" not in hit["answer"]
 
 
 def test_one_way_question_does_not_use_cross_planner():
@@ -173,6 +199,10 @@ def test_graph_declines_gdp_and_answers_loan_type():
     miss = run_ask("What will GDP be next year?")
     assert miss["declined"] is True
     assert miss["engine"] == "rules"
+    help_hit = run_ask("what is this")
+    assert help_hit["declined"] is False
+    assert help_hit["engine"] == "rules"
+    assert "Ask the Portfolio" in help_hit["answer"]
 
 
 def test_number_validator_rejects_hallucinated_rate():

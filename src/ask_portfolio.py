@@ -186,7 +186,12 @@ def answer_local(question: str, facts: dict[str, Any]) -> dict[str, Any]:
             "source": "cross tab employment_type × loan_type",
         }
 
-    if re.search(r"\b(hello|hi)\b", q):
+    if re.search(r"\b(hello|hi)\b", q) or q.strip(" ?!.") in {
+        "what is this",
+        "what's this",
+        "what can you do",
+        "help",
+    }:
         return {
             "declined": False,
             "answer": "Ask a portfolio question, for example: which loan type has the highest default rate?",

@@ -292,12 +292,23 @@ def node_load(state: AskState) -> dict[str, Any]:
     return {"facts": load_facts(), "retries": int(state.get("retries") or 0), "validation_error": ""}
 
 
+HELP = (
+    "what is this",
+    "what's this",
+    "what can you do",
+    "what do you do",
+    "who are you",
+    "help",
+    "how does this work",
+)
+
+
 def node_classify(state: AskState) -> dict[str, Any]:
     q = (state.get("question") or "").strip()
     if not q:
         return {"intent": "decline"}
-    low = q.lower()
-    if re.search(r"\b(hello|hi|hey)\b", low) and len(low.split()) <= 4:
+    low = q.lower().strip(" ?!.")
+    if low in HELP or (re.search(r"\b(hello|hi|hey)\b", low) and len(low.split()) <= 4):
         return {"intent": "chitchat"}
     if any(w in low for w in OFF_TOPIC):
         return {"intent": "decline"}
@@ -309,7 +320,13 @@ def node_classify(state: AskState) -> dict[str, Any]:
 def node_chitchat(state: AskState) -> dict[str, Any]:
     return {
         "declined": False,
-        "answer": "Ask a portfolio question, for example: which loan type has the highest default rate?",
+        "answer": (
+            "This is Ask the Portfolio — a grounded Q&A over the credit-risk book "
+            "(customers, loans, bureau, repayment, collections). Ask a cut of the book, "
+            "including joins: which loan type has the highest default rate? which region "
+            "has most salaried employees with a business loan? how many contract people "
+            "in West have defaulted on a mortgage or personal loan?"
+        ),
         "source": None,
         "engine": "rules",
     }
@@ -372,7 +389,7 @@ def node_generate(state: AskState) -> dict[str, Any]:
         }
     except Exception as exc:  # noqa: BLE001
         local = answer_local(state["question"], state["facts"])
-        prefix = f"(LLM unavailable: {type(exc).__name__}. Using local facts.) "
+        prefix = "" if not local["declined"] else f"(LLM unavailable: {type(exc).__name__}. Using local facts.) "
         return {
             "draft": local["answer"],
             "declined": local["declined"],

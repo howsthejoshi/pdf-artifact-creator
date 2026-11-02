@@ -74,11 +74,32 @@ DIMS: list[dict[str, Any]] = [
 ]
 
 
-def _match_value(q: str, values: dict[str, str]) -> str | None:
+def _match_values(q: str, values: dict[str, str]) -> list[str]:
+    found: list[str] = []
+    seen: set[str] = set()
     for needle, label in sorted(values.items(), key=lambda kv: -len(kv[0])):
-        if needle in q:
-            return label
-    return None
+        if needle in q and label not in seen:
+            seen.add(label)
+            found.append(label)
+    return found
+
+
+def _wants_defaulted(q: str) -> bool:
+    if any(w in q for w in ("default rate", "highest default", "riskiest", "default %")):
+        return False
+    return any(
+        w in q
+        for w in (
+            "have defaulted",
+            "has defaulted",
+            "who defaulted",
+            "that defaulted",
+            "defaulted in",
+            "defaulted on",
+            "how many default",
+            "number of default",
+        )
+    )
 
 
 @lru_cache(maxsize=1)
@@ -90,17 +111,17 @@ def parse_spec(question: str) -> dict[str, Any] | None:
     q = question.lower().strip()
     if not q:
         return None
-    filters: dict[str, str] = {}
+    filters: dict[str, list[str]] = {}
     group_by: list[str] = []
     for dim in DIMS:
         mentioned_which = any(w in q for w in dim["which"])
-        value = _match_value(q, dim["values"])
+        values = _match_values(q, dim["values"])
         if mentioned_which:
             group_by.append(dim["col"])
-        elif value:
-            filters[dim["col"]] = value
-        elif dim["col"] == "employment_type" and "employee" in q and value is None:
-            pass
+            if values:
+                filters[dim["col"]] = values
+        elif values:
+            filters[dim["col"]] = values
     if "cross" in q or ("by " in q and " and " in q) or " vs " in q:
         for dim in DIMS:
             if dim["col"] not in filters and dim["col"] not in group_by:
@@ -119,9 +140,15 @@ def parse_spec(question: str) -> dict[str, Any] | None:
     else:
         metric = "accounts"
 
+    defaulted_only = _wants_defaulted(q)
+    multi_value = any(len(v) > 1 for v in filters.values())
     is_cross = bool(filters) and bool(group_by)
     is_multi = len(group_by) >= 2
-    is_cell = bool(filters) and not group_by and any(w in q for w in ("how many", "number of", "count of", "share of"))
+    is_cell = bool(filters) and not group_by and (
+        any(w in q for w in ("how many", "number of", "count of", "share of"))
+        or defaulted_only
+        or multi_value
+    )
     if not (is_cross or is_multi or is_cell or "cross" in q):
         return None
     if is_cell:
@@ -133,7 +160,13 @@ def parse_spec(question: str) -> dict[str, Any] | None:
         if c not in seen:
             seen.add(c)
             gb.append(c)
-    return {"filters": filters, "group_by": gb, "metric": metric, "question": q}
+    return {
+        "filters": filters,
+        "group_by": gb,
+        "metric": metric,
+        "question": q,
+        "defaulted_only": defaulted_only,
+    }
 
 
 def run_cross(question: str) -> dict[str, Any] | None:
@@ -142,10 +175,12 @@ def run_cross(question: str) -> dict[str, Any] | None:
         return None
     df = load_panel()
     work = df
-    for col, val in spec["filters"].items():
+    for col, vals in spec["filters"].items():
         if col not in work.columns:
             return None
-        work = work.loc[work[col] == val]
+        work = work.loc[work[col].isin(vals)]
+    if spec.get("defaulted_only"):
+        work = work.loc[work["target_default"] == 1]
     if work.empty:
         return {
             "spec": spec,
@@ -156,21 +191,22 @@ def run_cross(question: str) -> dict[str, Any] | None:
     metric = spec["metric"]
     gb = spec["group_by"]
     if not gb:
-        row = {
-            "accounts": int(len(work)),
-            "customers": int(work["customer_id"].nunique()),
-            "defaults": int(work["target_default"].sum()),
-            "default_rate": round(float(work["target_default"].mean()), 4),
-            "exposure": round(float(work["exposure"].sum()), 2),
-            **spec["filters"],
-        }
+        row = _summarize(work)
+        for col, vals in spec["filters"].items():
+            row[col] = " / ".join(vals)
         table = [_jsonable(row)]
-        headline = (
-            f"{row['customers']:,} customers / {row['accounts']:,} accounts"
-            f" match {', '.join(f'{k}={v}' for k, v in spec['filters'].items())}"
-            f" (default {_pct(row['default_rate'])}, exposure {_money(row['exposure'])})."
-        )
-        return {"spec": spec, "table": table, "headline": headline, "source": "analysis panel filtered cell"}
+        split = []
+        loan_vals = spec["filters"].get("loan_type") or []
+        if len(loan_vals) > 1:
+            for lt, part in work.groupby("loan_type"):
+                split.append(_jsonable({"loan_type": str(lt), **_summarize(part)}))
+        headline = _cell_headline(spec, row, split)
+        return {
+            "spec": spec,
+            "table": table + split,
+            "headline": headline,
+            "source": "analysis panel filtered cell",
+        }
 
     grouped = work.groupby(gb, dropna=False, as_index=False).agg(
         accounts=("account_id", "count"),
@@ -186,7 +222,7 @@ def run_cross(question: str) -> dict[str, Any] | None:
     table = [_jsonable(r) for r in grouped.head(40).to_dict(orient="records")]
     top = table[0]
     keys = " × ".join(str(top[c]) for c in gb)
-    filt = ", ".join(f"{v}" for v in spec["filters"].values()) or "the book"
+    filt = _filter_phrase(spec) or "the book"
     if metric == "default_rate":
         lead = f"{keys} has the highest default rate among {filt}"
         stat = f"{_pct(top['default_rate'])} on {int(top['accounts']):,} accounts"
@@ -227,6 +263,46 @@ def format_cross(result: dict[str, Any]) -> dict[str, Any]:
         "answer": answer,
         "source": result["source"],
     }
+
+
+def _summarize(work: pd.DataFrame) -> dict[str, Any]:
+    return {
+        "accounts": int(len(work)),
+        "customers": int(work["customer_id"].nunique()),
+        "defaults": int(work["target_default"].sum()),
+        "default_rate": round(float(work["target_default"].mean()) if len(work) else 0.0, 4),
+        "exposure": round(float(work["exposure"].sum()), 2),
+    }
+
+
+def _filter_phrase(spec: dict[str, Any]) -> str:
+    bits = []
+    for col, vals in (spec.get("filters") or {}).items():
+        bits.append(" / ".join(vals))
+    if spec.get("defaulted_only"):
+        bits.append("defaulted accounts")
+    return ", ".join(bits)
+
+
+def _cell_headline(spec: dict[str, Any], row: dict[str, Any], split: list[dict[str, Any]]) -> str:
+    who = _filter_phrase({**spec, "defaulted_only": False}) or "the book"
+    if spec.get("defaulted_only"):
+        headline = (
+            f"{row['customers']:,} customers have defaulted among {who} "
+            f"({row['accounts']:,} defaulted accounts, exposure {_money(row['exposure'])})."
+        )
+    else:
+        headline = (
+            f"{row['customers']:,} customers / {row['accounts']:,} accounts match {who} "
+            f"(default {_pct(row['default_rate'])}, exposure {_money(row['exposure'])})."
+        )
+    if split:
+        parts = [
+            f"{r['loan_type']}: {int(r['customers']):,} customers / {int(r['accounts']):,} accounts"
+            for r in split
+        ]
+        headline += " By product — " + "; ".join(parts) + "."
+    return headline
 
 
 def _jsonable(row: dict[str, Any]) -> dict[str, Any]:
