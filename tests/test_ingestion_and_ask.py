@@ -115,6 +115,56 @@ def test_salaried_business_loan_by_region():
     assert "214" in hit["answer"]
 
 
+def test_cross_join_employment_and_loan_type():
+    from src.ask_portfolio import answer_local, load_facts
+    from src.cross_query import parse_spec, run_cross
+
+    spec = parse_spec("default rate by employment and loan type")
+    assert spec is not None
+    assert "employment_type" in spec["group_by"]
+    assert "loan_type" in spec["group_by"]
+    assert spec["filters"] == {}
+
+    facts = load_facts()
+    hit = answer_local("default rate by employment and loan type", facts)
+    assert hit["declined"] is False
+    assert "default" in hit["answer"].lower()
+    result = run_cross("default rate by employment and loan type")
+    assert result and result["table"]
+    top = result["table"][0]
+    assert str(top["employment_type"]) in hit["answer"]
+    assert str(top["loan_type"]) in hit["answer"]
+
+
+def test_cross_join_filtered_cell():
+    from src.ask_portfolio import answer_local, load_facts
+    from src.cross_query import parse_spec, run_cross
+
+    q = "How many salaried customers have a mortgage in the South?"
+    spec = parse_spec(q)
+    assert spec is not None
+    assert spec["filters"]["employment_type"] == "Salaried"
+    assert spec["filters"]["loan_type"] == "Mortgage"
+    assert spec["filters"]["region"] == "South"
+    assert spec["group_by"] == []
+
+    result = run_cross(q)
+    assert result and result["table"]
+    row = result["table"][0]
+    facts = load_facts()
+    hit = answer_local(q, facts)
+    assert hit["declined"] is False
+    assert str(row["customers"]) in hit["answer"]
+    assert str(row["accounts"]) in hit["answer"]
+
+
+def test_one_way_question_does_not_use_cross_planner():
+    from src.cross_query import parse_spec
+
+    assert parse_spec("Which loan type has the highest default rate?") is None
+    assert parse_spec("What will GDP be next year?") is None
+
+
 def test_graph_declines_gdp_and_answers_loan_type():
     hit = run_ask("Which loan type has the highest default rate?")
     assert hit["declined"] is False

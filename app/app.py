@@ -256,7 +256,10 @@ def ask_view() -> None:
 
     llm = available_llm()
     if llm:
-        st.caption(f"LangGraph agent · LLM `{llm[0]}:{llm[1]}` · answers grounded in facts.json")
+        st.caption(
+            f"LangGraph agent · LLM `{llm[0]}:{llm[1]}` · one-way cuts from facts.json, "
+            "cross-joins from the analysis panel (grouped only — no account rows)"
+        )
     else:
         st.caption(
             "LangGraph agent · no free LLM key set, so the generate node uses the local fact retriever. "
@@ -270,12 +273,13 @@ def ask_view() -> None:
 
     examples = [
         "Which loan type has the highest default rate?",
-        "What is the portfolio default rate?",
-        "Which employment type is riskiest?",
+        "Which region has most salaried employees having a business loan?",
+        "Default rate by employment and loan type",
+        "How many salaried customers have a mortgage in the South?",
     ]
-    e1, e2, e3 = st.columns(3)
-    for col, text in zip((e1, e2, e3), examples):
-        if col.button(text, key=f"ex_{text[:12]}"):
+    e1, e2, e3, e4 = st.columns(4)
+    for col, text in zip((e1, e2, e3, e4), examples):
+        if col.button(text, key=f"ex_{text[:18]}"):
             st.session_state.ask_box = text
             _submit_question(text)
             st.rerun()
@@ -284,7 +288,7 @@ def ask_view() -> None:
         "Your question",
         key="ask_box",
         height=90,
-        placeholder="e.g. Which loan type has the highest default rate?",
+        placeholder="e.g. Which region has most salaried employees having a business loan?",
     )
     if st.button("Ask now", type="primary", use_container_width=True):
         _submit_question(st.session_state.ask_box)
@@ -304,7 +308,9 @@ def ask_view() -> None:
             """
 - **Trigger:** Ask now runs a LangGraph (`load → classify → retrieve → generate → validate`).
   Generate uses Groq `openai/gpt-oss-20b` when `GROQ_API_KEY` is set (free tier), else Gemini or OpenAI
-  if those keys exist. Only grouped `facts.json` is sent — never account rows.
+  if those keys exist. One-way cuts come from `facts.json`. Cross-joins
+  (region × employment × product, and other filters) are aggregated on the
+  analysis panel first — only the grouped table is sent, never account rows.
 - **False positive:** a fluent LLM answer with a rate not in the tables. The validate node rejects it
   and either retries or falls back to the local retriever.
 - **False negative:** an off-topic or account-id question is declined on purpose.

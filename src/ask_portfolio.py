@@ -97,6 +97,15 @@ def answer_local(question: str, facts: dict[str, Any]) -> dict[str, Any]:
     if not q:
         return declined
 
+    from src.cross_query import format_cross, run_cross
+
+    try:
+        cross = run_cross(question)
+    except FileNotFoundError:
+        cross = None
+    if cross:
+        return format_cross(cross)
+
     triple = answer_triple_count(q, facts)
     if triple:
         return triple

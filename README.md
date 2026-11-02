@@ -65,7 +65,9 @@ cp .env.example .env
 
 Temperature 0. Payload is grouped rates from `data/processed/facts.json` plus the question. GDP / forecasts / PII / raw `ACC…` ids are declined.
 
-Try: “Which loan type has the highest default rate?” (Mortgage ~24.6%) · “What is the portfolio default rate?” (16.1%) · “What will GDP be next year?” (declined).
+Try: “Which loan type has the highest default rate?” (Mortgage ~24.6%) · “Which region has most salaried employees having a business loan?” (South, 207 customers / 214 accounts) · “Default rate by employment and loan type” · “What will GDP be next year?” (declined).
+
+Cross-join questions are planned in `src/cross_query.py` against `analysis_panel.parquet` (filters × group-by, max 40 grouped rows). The LLM never sees account-level rows.
 
 ## Where the brief lives
 

@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from langgraph.graph import END, START, StateGraph
 
 from src.ask_portfolio import answer_local, load_facts
+from src.cross_query import run_cross
 from src.paths import ROOT
 
 load_dotenv(ROOT / ".env")
@@ -114,6 +115,15 @@ def evidence_for(question: str, facts: dict[str, Any]) -> dict[str, Any]:
     for key in selected:
         if key in facts:
             out[key] = facts[key]
+    try:
+        cross = run_cross(question)
+    except FileNotFoundError:
+        cross = None
+    if cross:
+        out["cross_query"] = cross["table"]
+        out["cross_spec"] = cross["spec"]
+        out["cross_headline"] = cross["headline"]
+        out["cross_source"] = cross["source"]
     return out
 
 
@@ -209,9 +219,12 @@ def _llm_messages(state: AskState) -> list[dict[str, str]]:
             "role": "system",
             "content": (
                 "You are a credit-risk analyst assistant. Answer ONLY from EVIDENCE JSON. "
-                "Never invent rates, counts, or dollar amounts. If EVIDENCE cannot answer, "
-                'set declined=true and say you cannot answer from the dashboard tables. '
-                "Return JSON only: {\"declined\": bool, \"answer\": str, \"source\": str}. "
+                "Never invent rates, counts, or dollar amounts. "
+                "If EVIDENCE.cross_query is present, you MUST answer the cross-cut from that table "
+                "(and cross_headline). Do not decline a join that the table already computed. "
+                "If EVIDENCE cannot answer, set declined=true and say you cannot answer from the "
+                "dashboard tables. Return JSON only: "
+                '{"declined": bool, "answer": str, "source": str}. '
                 "Keep the answer to at most 3 sentences. Cite the grouping you used in source."
             ),
         },
@@ -318,6 +331,20 @@ def node_retrieve(state: AskState) -> dict[str, Any]:
     return {"evidence": evidence_for(state["question"], state["facts"])}
 
 
+def _from_cross_evidence(state: AskState) -> dict[str, Any] | None:
+    ev = state.get("evidence") or {}
+    headline = ev.get("cross_headline")
+    if not headline:
+        return None
+    return {
+        "draft": headline,
+        "declined": False,
+        "source": ev.get("cross_source"),
+        "engine": "local_retriever",
+        "answer": headline,
+    }
+
+
 def node_generate(state: AskState) -> dict[str, Any]:
     spec = available_llm()
     if spec is None:
@@ -333,6 +360,10 @@ def node_generate(state: AskState) -> dict[str, Any]:
     try:
         raw = _complete(provider, model, _llm_messages(state))
         parsed = _parse_llm_json(raw)
+        if parsed["declined"]:
+            cross = _from_cross_evidence(state)
+            if cross:
+                return cross
         return {
             "draft": parsed["answer"],
             "declined": parsed["declined"],
