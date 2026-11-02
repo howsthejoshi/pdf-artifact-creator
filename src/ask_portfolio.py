@@ -29,6 +29,64 @@ def _best(rows: list[dict], key: str = "default_rate") -> dict:
     return max(rows, key=lambda r: r[key])
 
 
+EMPLOYMENT_ALIASES = {
+    "salaried": "Salaried",
+    "unemployed": "Unemployed",
+    "self-employed": "Self-Employed",
+    "self employed": "Self-Employed",
+    "contract": "Contract",
+    "business owner": "Business Owner",
+}
+LOAN_ALIASES = {
+    "business loan": "Business Loan",
+    "personal loan": "Personal Loan",
+    "credit card": "Credit Card",
+    "auto loan": "Auto Loan",
+    "mortgage": "Mortgage",
+    "auto": "Auto Loan",
+    "business": "Business Loan",
+}
+
+
+def _match_alias(q: str, aliases: dict[str, str]) -> str | None:
+    for needle, label in sorted(aliases.items(), key=lambda kv: -len(kv[0])):
+        if needle in q:
+            return label
+    return None
+
+
+def answer_triple_count(question: str, facts: dict[str, Any]) -> dict[str, Any] | None:
+    q = question.lower()
+    emp = _match_alias(q, EMPLOYMENT_ALIASES)
+    loan = _match_alias(q, LOAN_ALIASES)
+    rows = facts.get("cross_region_employment_loan_type") or []
+    if not rows or "region" not in q or emp is None or loan is None:
+        return None
+    cells = [r for r in rows if r.get("employment_type") == emp and r.get("loan_type") == loan]
+    if not cells:
+        return {
+            "declined": False,
+            "answer": f"No accounts in the book for {emp} with a {loan}.",
+            "source": "region × employment_type × loan_type",
+        }
+    metric = "customers" if any(w in q for w in ("customer", "employee", "people", "borrower")) else "accounts"
+    if metric not in cells[0]:
+        metric = "accounts"
+    top = max(cells, key=lambda r: int(r.get(metric) or 0))
+    n_acc = int(top.get("accounts") or 0)
+    n_cust = int(top.get("customers") or 0)
+    return {
+        "declined": False,
+        "answer": (
+            f"{top['region']} has the most {emp.lower()} {loan.lower()}s: "
+            f"{n_cust:,} customers and {n_acc:,} accounts "
+            f"(default rate {_fmt_pct(float(top.get('default_rate') or 0))}, "
+            f"exposure {_fmt_money(float(top.get('exposure') or 0))})."
+        ),
+        "source": "analysis panel grouped by region × employment_type × loan_type",
+    }
+
+
 def answer_local(question: str, facts: dict[str, Any]) -> dict[str, Any]:
     q = question.lower().strip()
     declined = {
@@ -38,6 +96,10 @@ def answer_local(question: str, facts: dict[str, Any]) -> dict[str, Any]:
     }
     if not q:
         return declined
+
+    triple = answer_triple_count(q, facts)
+    if triple:
+        return triple
 
     if any(w in q for w in ["how many customer", "number of customer", "n_customer"]):
         return {
@@ -74,22 +136,24 @@ def answer_local(question: str, facts: dict[str, Any]) -> dict[str, Any]:
         "channel": "by_disbursal_channel",
         "education": "by_education_level",
     }
+    asks_rate = any(w in q for w in ("default", "rate", "riskiest", "risk"))
     wants_highest = any(w in q for w in ["highest", "worst", "riskiest", "most default"])
     wants_lowest = any(w in q for w in ["lowest", "best", "safest"])
-    for word, key in dim_map.items():
-        if word in q:
-            rows = facts[key]
-            row = _best(rows) if not wants_lowest else min(rows, key=lambda r: r["default_rate"])
-            label = list(row.values())[0]
-            return {
-                "declined": False,
-                "answer": (
-                    f"{label} has the {'highest' if not wants_lowest else 'lowest'} default rate at "
-                    f"{_fmt_pct(row['default_rate'])} on {row['accounts']:,} accounts "
-                    f"({row['defaults']} defaults), exposure {_fmt_money(row['exposure'])}."
-                ),
-                "source": f"analysis panel grouped by {key.replace('by_', '')}",
-            }
+    if asks_rate:
+        for word, key in dim_map.items():
+            if word in q:
+                rows = facts[key]
+                row = _best(rows) if not wants_lowest else min(rows, key=lambda r: r["default_rate"])
+                label = list(row.values())[0]
+                return {
+                    "declined": False,
+                    "answer": (
+                        f"{label} has the {'highest' if not wants_lowest else 'lowest'} default rate at "
+                        f"{_fmt_pct(row['default_rate'])} on {row['accounts']:,} accounts "
+                        f"({row['defaults']} defaults), exposure {_fmt_money(row['exposure'])}."
+                    ),
+                    "source": f"analysis panel grouped by {key.replace('by_', '')}",
+                }
 
     if "unemployed" in q:
         row = next(r for r in facts["by_employment_type"] if r["employment_type"] == "Unemployed")

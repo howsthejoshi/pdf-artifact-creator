@@ -96,6 +96,12 @@ def evidence_for(question: str, facts: dict[str, Any]) -> dict[str, Any]:
     selected = {v for k, v in dim_map.items() if k in q}
     if "cross" in q or ("employment" in q and "loan" in q):
         selected.add("cross_employment_loan_type")
+    if ("region" in q) and (
+        any(w in q for w in ("salaried", "unemployed", "employment", "employee", "self-employed", "contract", "business owner"))
+        or any(w in q for w in ("loan", "mortgage", "business", "personal", "credit card", "auto"))
+    ):
+        selected.add("cross_region_employment_loan_type")
+        selected.add("cross_employment_loan_type")
     if not selected:
         selected = {
             "by_loan_type",

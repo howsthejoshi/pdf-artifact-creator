@@ -634,6 +634,1258 @@
       "default_rate": 0.4462
     }
   ],
+  "cross_region_employment_loan_type": [
+    {
+      "region": "Central",
+      "employment_type": "Business Owner",
+      "loan_type": "Auto Loan",
+      "accounts": 50,
+      "customers": 47,
+      "defaults": 7,
+      "default_rate": 0.14,
+      "exposure": 1487053.24
+    },
+    {
+      "region": "Central",
+      "employment_type": "Business Owner",
+      "loan_type": "Business Loan",
+      "accounts": 30,
+      "customers": 30,
+      "defaults": 4,
+      "default_rate": 0.1333,
+      "exposure": 1718251.91
+    },
+    {
+      "region": "Central",
+      "employment_type": "Business Owner",
+      "loan_type": "Credit Card",
+      "accounts": 72,
+      "customers": 66,
+      "defaults": 6,
+      "default_rate": 0.0833,
+      "exposure": 568937.27
+    },
+    {
+      "region": "Central",
+      "employment_type": "Business Owner",
+      "loan_type": "Mortgage",
+      "accounts": 38,
+      "customers": 35,
+      "defaults": 9,
+      "default_rate": 0.2368,
+      "exposure": 8145787.98
+    },
+    {
+      "region": "Central",
+      "employment_type": "Business Owner",
+      "loan_type": "Personal Loan",
+      "accounts": 103,
+      "customers": 91,
+      "defaults": 13,
+      "default_rate": 0.1262,
+      "exposure": 1586257.33
+    },
+    {
+      "region": "Central",
+      "employment_type": "Contract",
+      "loan_type": "Auto Loan",
+      "accounts": 43,
+      "customers": 39,
+      "defaults": 10,
+      "default_rate": 0.2326,
+      "exposure": 1090361.81
+    },
+    {
+      "region": "Central",
+      "employment_type": "Contract",
+      "loan_type": "Business Loan",
+      "accounts": 25,
+      "customers": 24,
+      "defaults": 4,
+      "default_rate": 0.16,
+      "exposure": 1769602.76
+    },
+    {
+      "region": "Central",
+      "employment_type": "Contract",
+      "loan_type": "Credit Card",
+      "accounts": 72,
+      "customers": 64,
+      "defaults": 13,
+      "default_rate": 0.1806,
+      "exposure": 583974.37
+    },
+    {
+      "region": "Central",
+      "employment_type": "Contract",
+      "loan_type": "Mortgage",
+      "accounts": 22,
+      "customers": 22,
+      "defaults": 6,
+      "default_rate": 0.2727,
+      "exposure": 4458414.81
+    },
+    {
+      "region": "Central",
+      "employment_type": "Contract",
+      "loan_type": "Personal Loan",
+      "accounts": 73,
+      "customers": 66,
+      "defaults": 16,
+      "default_rate": 0.2192,
+      "exposure": 1136239.44
+    },
+    {
+      "region": "Central",
+      "employment_type": "Salaried",
+      "loan_type": "Auto Loan",
+      "accounts": 233,
+      "customers": 217,
+      "defaults": 18,
+      "default_rate": 0.0773,
+      "exposure": 6383631.06
+    },
+    {
+      "region": "Central",
+      "employment_type": "Salaried",
+      "loan_type": "Business Loan",
+      "accounts": 134,
+      "customers": 129,
+      "defaults": 21,
+      "default_rate": 0.1567,
+      "exposure": 8051038.59
+    },
+    {
+      "region": "Central",
+      "employment_type": "Salaried",
+      "loan_type": "Credit Card",
+      "accounts": 308,
+      "customers": 272,
+      "defaults": 50,
+      "default_rate": 0.1623,
+      "exposure": 2423968.61
+    },
+    {
+      "region": "Central",
+      "employment_type": "Salaried",
+      "loan_type": "Mortgage",
+      "accounts": 132,
+      "customers": 128,
+      "defaults": 26,
+      "default_rate": 0.197,
+      "exposure": 28038727.71
+    },
+    {
+      "region": "Central",
+      "employment_type": "Salaried",
+      "loan_type": "Personal Loan",
+      "accounts": 418,
+      "customers": 378,
+      "defaults": 48,
+      "default_rate": 0.1148,
+      "exposure": 6304941.08
+    },
+    {
+      "region": "Central",
+      "employment_type": "Self-Employed",
+      "loan_type": "Auto Loan",
+      "accounts": 94,
+      "customers": 88,
+      "defaults": 11,
+      "default_rate": 0.117,
+      "exposure": 2683542.15
+    },
+    {
+      "region": "Central",
+      "employment_type": "Self-Employed",
+      "loan_type": "Business Loan",
+      "accounts": 48,
+      "customers": 43,
+      "defaults": 13,
+      "default_rate": 0.2708,
+      "exposure": 2925035.0
+    },
+    {
+      "region": "Central",
+      "employment_type": "Self-Employed",
+      "loan_type": "Credit Card",
+      "accounts": 102,
+      "customers": 97,
+      "defaults": 10,
+      "default_rate": 0.098,
+      "exposure": 796207.82
+    },
+    {
+      "region": "Central",
+      "employment_type": "Self-Employed",
+      "loan_type": "Mortgage",
+      "accounts": 50,
+      "customers": 46,
+      "defaults": 9,
+      "default_rate": 0.18,
+      "exposure": 11229265.47
+    },
+    {
+      "region": "Central",
+      "employment_type": "Self-Employed",
+      "loan_type": "Personal Loan",
+      "accounts": 169,
+      "customers": 154,
+      "defaults": 20,
+      "default_rate": 0.1183,
+      "exposure": 2595930.49
+    },
+    {
+      "region": "Central",
+      "employment_type": "Unemployed",
+      "loan_type": "Auto Loan",
+      "accounts": 20,
+      "customers": 19,
+      "defaults": 6,
+      "default_rate": 0.3,
+      "exposure": 582346.87
+    },
+    {
+      "region": "Central",
+      "employment_type": "Unemployed",
+      "loan_type": "Business Loan",
+      "accounts": 9,
+      "customers": 9,
+      "defaults": 5,
+      "default_rate": 0.5556,
+      "exposure": 577248.75
+    },
+    {
+      "region": "Central",
+      "employment_type": "Unemployed",
+      "loan_type": "Credit Card",
+      "accounts": 28,
+      "customers": 25,
+      "defaults": 10,
+      "default_rate": 0.3571,
+      "exposure": 218487.17
+    },
+    {
+      "region": "Central",
+      "employment_type": "Unemployed",
+      "loan_type": "Mortgage",
+      "accounts": 2,
+      "customers": 2,
+      "defaults": 2,
+      "default_rate": 1.0,
+      "exposure": 403487.97
+    },
+    {
+      "region": "Central",
+      "employment_type": "Unemployed",
+      "loan_type": "Personal Loan",
+      "accounts": 39,
+      "customers": 32,
+      "defaults": 10,
+      "default_rate": 0.2564,
+      "exposure": 552678.25
+    },
+    {
+      "region": "East",
+      "employment_type": "Business Owner",
+      "loan_type": "Auto Loan",
+      "accounts": 66,
+      "customers": 61,
+      "defaults": 8,
+      "default_rate": 0.1212,
+      "exposure": 1760764.0
+    },
+    {
+      "region": "East",
+      "employment_type": "Business Owner",
+      "loan_type": "Business Loan",
+      "accounts": 41,
+      "customers": 41,
+      "defaults": 5,
+      "default_rate": 0.122,
+      "exposure": 2619747.37
+    },
+    {
+      "region": "East",
+      "employment_type": "Business Owner",
+      "loan_type": "Credit Card",
+      "accounts": 88,
+      "customers": 86,
+      "defaults": 14,
+      "default_rate": 0.1591,
+      "exposure": 733912.49
+    },
+    {
+      "region": "East",
+      "employment_type": "Business Owner",
+      "loan_type": "Mortgage",
+      "accounts": 36,
+      "customers": 35,
+      "defaults": 10,
+      "default_rate": 0.2778,
+      "exposure": 7528784.69
+    },
+    {
+      "region": "East",
+      "employment_type": "Business Owner",
+      "loan_type": "Personal Loan",
+      "accounts": 131,
+      "customers": 113,
+      "defaults": 11,
+      "default_rate": 0.084,
+      "exposure": 1924939.25
+    },
+    {
+      "region": "East",
+      "employment_type": "Contract",
+      "loan_type": "Auto Loan",
+      "accounts": 63,
+      "customers": 56,
+      "defaults": 12,
+      "default_rate": 0.1905,
+      "exposure": 1685389.19
+    },
+    {
+      "region": "East",
+      "employment_type": "Contract",
+      "loan_type": "Business Loan",
+      "accounts": 27,
+      "customers": 27,
+      "defaults": 2,
+      "default_rate": 0.0741,
+      "exposure": 1752295.99
+    },
+    {
+      "region": "East",
+      "employment_type": "Contract",
+      "loan_type": "Credit Card",
+      "accounts": 56,
+      "customers": 53,
+      "defaults": 6,
+      "default_rate": 0.1071,
+      "exposure": 426119.74
+    },
+    {
+      "region": "East",
+      "employment_type": "Contract",
+      "loan_type": "Mortgage",
+      "accounts": 22,
+      "customers": 22,
+      "defaults": 3,
+      "default_rate": 0.1364,
+      "exposure": 5078596.48
+    },
+    {
+      "region": "East",
+      "employment_type": "Contract",
+      "loan_type": "Personal Loan",
+      "accounts": 104,
+      "customers": 93,
+      "defaults": 12,
+      "default_rate": 0.1154,
+      "exposure": 1594777.97
+    },
+    {
+      "region": "East",
+      "employment_type": "Salaried",
+      "loan_type": "Auto Loan",
+      "accounts": 287,
+      "customers": 267,
+      "defaults": 39,
+      "default_rate": 0.1359,
+      "exposure": 7914468.57
+    },
+    {
+      "region": "East",
+      "employment_type": "Salaried",
+      "loan_type": "Business Loan",
+      "accounts": 128,
+      "customers": 124,
+      "defaults": 15,
+      "default_rate": 0.1172,
+      "exposure": 8416781.17
+    },
+    {
+      "region": "East",
+      "employment_type": "Salaried",
+      "loan_type": "Credit Card",
+      "accounts": 360,
+      "customers": 335,
+      "defaults": 61,
+      "default_rate": 0.1694,
+      "exposure": 2776492.79
+    },
+    {
+      "region": "East",
+      "employment_type": "Salaried",
+      "loan_type": "Mortgage",
+      "accounts": 129,
+      "customers": 126,
+      "defaults": 29,
+      "default_rate": 0.2248,
+      "exposure": 28122220.7
+    },
+    {
+      "region": "East",
+      "employment_type": "Salaried",
+      "loan_type": "Personal Loan",
+      "accounts": 519,
+      "customers": 458,
+      "defaults": 74,
+      "default_rate": 0.1426,
+      "exposure": 8211211.13
+    },
+    {
+      "region": "East",
+      "employment_type": "Self-Employed",
+      "loan_type": "Auto Loan",
+      "accounts": 106,
+      "customers": 98,
+      "defaults": 15,
+      "default_rate": 0.1415,
+      "exposure": 2984066.95
+    },
+    {
+      "region": "East",
+      "employment_type": "Self-Employed",
+      "loan_type": "Business Loan",
+      "accounts": 52,
+      "customers": 50,
+      "defaults": 12,
+      "default_rate": 0.2308,
+      "exposure": 3401622.95
+    },
+    {
+      "region": "East",
+      "employment_type": "Self-Employed",
+      "loan_type": "Credit Card",
+      "accounts": 143,
+      "customers": 134,
+      "defaults": 22,
+      "default_rate": 0.1538,
+      "exposure": 1164669.78
+    },
+    {
+      "region": "East",
+      "employment_type": "Self-Employed",
+      "loan_type": "Mortgage",
+      "accounts": 54,
+      "customers": 53,
+      "defaults": 6,
+      "default_rate": 0.1111,
+      "exposure": 11410691.56
+    },
+    {
+      "region": "East",
+      "employment_type": "Self-Employed",
+      "loan_type": "Personal Loan",
+      "accounts": 200,
+      "customers": 171,
+      "defaults": 27,
+      "default_rate": 0.135,
+      "exposure": 2956705.29
+    },
+    {
+      "region": "East",
+      "employment_type": "Unemployed",
+      "loan_type": "Auto Loan",
+      "accounts": 31,
+      "customers": 28,
+      "defaults": 11,
+      "default_rate": 0.3548,
+      "exposure": 895835.38
+    },
+    {
+      "region": "East",
+      "employment_type": "Unemployed",
+      "loan_type": "Business Loan",
+      "accounts": 14,
+      "customers": 13,
+      "defaults": 8,
+      "default_rate": 0.5714,
+      "exposure": 778798.97
+    },
+    {
+      "region": "East",
+      "employment_type": "Unemployed",
+      "loan_type": "Credit Card",
+      "accounts": 34,
+      "customers": 32,
+      "defaults": 18,
+      "default_rate": 0.5294,
+      "exposure": 306511.25
+    },
+    {
+      "region": "East",
+      "employment_type": "Unemployed",
+      "loan_type": "Mortgage",
+      "accounts": 15,
+      "customers": 14,
+      "defaults": 9,
+      "default_rate": 0.6,
+      "exposure": 3194616.24
+    },
+    {
+      "region": "East",
+      "employment_type": "Unemployed",
+      "loan_type": "Personal Loan",
+      "accounts": 41,
+      "customers": 37,
+      "defaults": 11,
+      "default_rate": 0.2683,
+      "exposure": 566199.21
+    },
+    {
+      "region": "North",
+      "employment_type": "Business Owner",
+      "loan_type": "Auto Loan",
+      "accounts": 66,
+      "customers": 63,
+      "defaults": 13,
+      "default_rate": 0.197,
+      "exposure": 1841861.27
+    },
+    {
+      "region": "North",
+      "employment_type": "Business Owner",
+      "loan_type": "Business Loan",
+      "accounts": 46,
+      "customers": 42,
+      "defaults": 4,
+      "default_rate": 0.087,
+      "exposure": 3043535.5
+    },
+    {
+      "region": "North",
+      "employment_type": "Business Owner",
+      "loan_type": "Credit Card",
+      "accounts": 95,
+      "customers": 89,
+      "defaults": 15,
+      "default_rate": 0.1579,
+      "exposure": 793178.91
+    },
+    {
+      "region": "North",
+      "employment_type": "Business Owner",
+      "loan_type": "Mortgage",
+      "accounts": 31,
+      "customers": 31,
+      "defaults": 4,
+      "default_rate": 0.129,
+      "exposure": 7050487.98
+    },
+    {
+      "region": "North",
+      "employment_type": "Business Owner",
+      "loan_type": "Personal Loan",
+      "accounts": 143,
+      "customers": 116,
+      "defaults": 17,
+      "default_rate": 0.1189,
+      "exposure": 2185445.86
+    },
+    {
+      "region": "North",
+      "employment_type": "Contract",
+      "loan_type": "Auto Loan",
+      "accounts": 68,
+      "customers": 63,
+      "defaults": 13,
+      "default_rate": 0.1912,
+      "exposure": 1969545.66
+    },
+    {
+      "region": "North",
+      "employment_type": "Contract",
+      "loan_type": "Business Loan",
+      "accounts": 33,
+      "customers": 33,
+      "defaults": 10,
+      "default_rate": 0.303,
+      "exposure": 2274498.62
+    },
+    {
+      "region": "North",
+      "employment_type": "Contract",
+      "loan_type": "Credit Card",
+      "accounts": 95,
+      "customers": 84,
+      "defaults": 13,
+      "default_rate": 0.1368,
+      "exposure": 811268.91
+    },
+    {
+      "region": "North",
+      "employment_type": "Contract",
+      "loan_type": "Mortgage",
+      "accounts": 31,
+      "customers": 30,
+      "defaults": 9,
+      "default_rate": 0.2903,
+      "exposure": 7054078.32
+    },
+    {
+      "region": "North",
+      "employment_type": "Contract",
+      "loan_type": "Personal Loan",
+      "accounts": 124,
+      "customers": 108,
+      "defaults": 15,
+      "default_rate": 0.121,
+      "exposure": 1987968.73
+    },
+    {
+      "region": "North",
+      "employment_type": "Salaried",
+      "loan_type": "Auto Loan",
+      "accounts": 310,
+      "customers": 286,
+      "defaults": 34,
+      "default_rate": 0.1097,
+      "exposure": 8508393.75
+    },
+    {
+      "region": "North",
+      "employment_type": "Salaried",
+      "loan_type": "Business Loan",
+      "accounts": 161,
+      "customers": 156,
+      "defaults": 20,
+      "default_rate": 0.1242,
+      "exposure": 11185619.07
+    },
+    {
+      "region": "North",
+      "employment_type": "Salaried",
+      "loan_type": "Credit Card",
+      "accounts": 427,
+      "customers": 388,
+      "defaults": 70,
+      "default_rate": 0.1639,
+      "exposure": 3571013.49
+    },
+    {
+      "region": "North",
+      "employment_type": "Salaried",
+      "loan_type": "Mortgage",
+      "accounts": 150,
+      "customers": 145,
+      "defaults": 42,
+      "default_rate": 0.28,
+      "exposure": 34030543.64
+    },
+    {
+      "region": "North",
+      "employment_type": "Salaried",
+      "loan_type": "Personal Loan",
+      "accounts": 557,
+      "customers": 490,
+      "defaults": 81,
+      "default_rate": 0.1454,
+      "exposure": 8300813.08
+    },
+    {
+      "region": "North",
+      "employment_type": "Self-Employed",
+      "loan_type": "Auto Loan",
+      "accounts": 114,
+      "customers": 107,
+      "defaults": 17,
+      "default_rate": 0.1491,
+      "exposure": 3184025.03
+    },
+    {
+      "region": "North",
+      "employment_type": "Self-Employed",
+      "loan_type": "Business Loan",
+      "accounts": 67,
+      "customers": 66,
+      "defaults": 9,
+      "default_rate": 0.1343,
+      "exposure": 4663553.82
+    },
+    {
+      "region": "North",
+      "employment_type": "Self-Employed",
+      "loan_type": "Credit Card",
+      "accounts": 166,
+      "customers": 151,
+      "defaults": 23,
+      "default_rate": 0.1386,
+      "exposure": 1353323.26
+    },
+    {
+      "region": "North",
+      "employment_type": "Self-Employed",
+      "loan_type": "Mortgage",
+      "accounts": 64,
+      "customers": 61,
+      "defaults": 10,
+      "default_rate": 0.1562,
+      "exposure": 14637679.36
+    },
+    {
+      "region": "North",
+      "employment_type": "Self-Employed",
+      "loan_type": "Personal Loan",
+      "accounts": 230,
+      "customers": 198,
+      "defaults": 38,
+      "default_rate": 0.1652,
+      "exposure": 3345026.8
+    },
+    {
+      "region": "North",
+      "employment_type": "Unemployed",
+      "loan_type": "Auto Loan",
+      "accounts": 29,
+      "customers": 27,
+      "defaults": 10,
+      "default_rate": 0.3448,
+      "exposure": 779758.95
+    },
+    {
+      "region": "North",
+      "employment_type": "Unemployed",
+      "loan_type": "Business Loan",
+      "accounts": 21,
+      "customers": 19,
+      "defaults": 6,
+      "default_rate": 0.2857,
+      "exposure": 1295461.82
+    },
+    {
+      "region": "North",
+      "employment_type": "Unemployed",
+      "loan_type": "Credit Card",
+      "accounts": 38,
+      "customers": 35,
+      "defaults": 11,
+      "default_rate": 0.2895,
+      "exposure": 288202.91
+    },
+    {
+      "region": "North",
+      "employment_type": "Unemployed",
+      "loan_type": "Mortgage",
+      "accounts": 20,
+      "customers": 19,
+      "defaults": 10,
+      "default_rate": 0.5,
+      "exposure": 4362952.82
+    },
+    {
+      "region": "North",
+      "employment_type": "Unemployed",
+      "loan_type": "Personal Loan",
+      "accounts": 61,
+      "customers": 55,
+      "defaults": 21,
+      "default_rate": 0.3443,
+      "exposure": 913980.34
+    },
+    {
+      "region": "South",
+      "employment_type": "Business Owner",
+      "loan_type": "Auto Loan",
+      "accounts": 96,
+      "customers": 86,
+      "defaults": 6,
+      "default_rate": 0.0625,
+      "exposure": 2827473.11
+    },
+    {
+      "region": "South",
+      "employment_type": "Business Owner",
+      "loan_type": "Business Loan",
+      "accounts": 47,
+      "customers": 43,
+      "defaults": 3,
+      "default_rate": 0.0638,
+      "exposure": 2733271.16
+    },
+    {
+      "region": "South",
+      "employment_type": "Business Owner",
+      "loan_type": "Credit Card",
+      "accounts": 122,
+      "customers": 108,
+      "defaults": 20,
+      "default_rate": 0.1639,
+      "exposure": 1068251.09
+    },
+    {
+      "region": "South",
+      "employment_type": "Business Owner",
+      "loan_type": "Mortgage",
+      "accounts": 44,
+      "customers": 42,
+      "defaults": 12,
+      "default_rate": 0.2727,
+      "exposure": 9385077.45
+    },
+    {
+      "region": "South",
+      "employment_type": "Business Owner",
+      "loan_type": "Personal Loan",
+      "accounts": 163,
+      "customers": 140,
+      "defaults": 22,
+      "default_rate": 0.135,
+      "exposure": 2481069.52
+    },
+    {
+      "region": "South",
+      "employment_type": "Contract",
+      "loan_type": "Auto Loan",
+      "accounts": 84,
+      "customers": 78,
+      "defaults": 12,
+      "default_rate": 0.1429,
+      "exposure": 2381986.48
+    },
+    {
+      "region": "South",
+      "employment_type": "Contract",
+      "loan_type": "Business Loan",
+      "accounts": 43,
+      "customers": 43,
+      "defaults": 9,
+      "default_rate": 0.2093,
+      "exposure": 3101421.25
+    },
+    {
+      "region": "South",
+      "employment_type": "Contract",
+      "loan_type": "Credit Card",
+      "accounts": 85,
+      "customers": 74,
+      "defaults": 16,
+      "default_rate": 0.1882,
+      "exposure": 622862.09
+    },
+    {
+      "region": "South",
+      "employment_type": "Contract",
+      "loan_type": "Mortgage",
+      "accounts": 34,
+      "customers": 34,
+      "defaults": 10,
+      "default_rate": 0.2941,
+      "exposure": 7715987.78
+    },
+    {
+      "region": "South",
+      "employment_type": "Contract",
+      "loan_type": "Personal Loan",
+      "accounts": 141,
+      "customers": 126,
+      "defaults": 29,
+      "default_rate": 0.2057,
+      "exposure": 2172792.19
+    },
+    {
+      "region": "South",
+      "employment_type": "Salaried",
+      "loan_type": "Auto Loan",
+      "accounts": 367,
+      "customers": 336,
+      "defaults": 59,
+      "default_rate": 0.1608,
+      "exposure": 10337231.96
+    },
+    {
+      "region": "South",
+      "employment_type": "Salaried",
+      "loan_type": "Business Loan",
+      "accounts": 214,
+      "customers": 207,
+      "defaults": 30,
+      "default_rate": 0.1402,
+      "exposure": 15193238.35
+    },
+    {
+      "region": "South",
+      "employment_type": "Salaried",
+      "loan_type": "Credit Card",
+      "accounts": 455,
+      "customers": 405,
+      "defaults": 54,
+      "default_rate": 0.1187,
+      "exposure": 3638628.43
+    },
+    {
+      "region": "South",
+      "employment_type": "Salaried",
+      "loan_type": "Mortgage",
+      "accounts": 209,
+      "customers": 202,
+      "defaults": 52,
+      "default_rate": 0.2488,
+      "exposure": 47016366.17
+    },
+    {
+      "region": "South",
+      "employment_type": "Salaried",
+      "loan_type": "Personal Loan",
+      "accounts": 627,
+      "customers": 550,
+      "defaults": 99,
+      "default_rate": 0.1579,
+      "exposure": 9303449.54
+    },
+    {
+      "region": "South",
+      "employment_type": "Self-Employed",
+      "loan_type": "Auto Loan",
+      "accounts": 125,
+      "customers": 123,
+      "defaults": 22,
+      "default_rate": 0.176,
+      "exposure": 3324237.03
+    },
+    {
+      "region": "South",
+      "employment_type": "Self-Employed",
+      "loan_type": "Business Loan",
+      "accounts": 70,
+      "customers": 68,
+      "defaults": 11,
+      "default_rate": 0.1571,
+      "exposure": 4759346.2
+    },
+    {
+      "region": "South",
+      "employment_type": "Self-Employed",
+      "loan_type": "Credit Card",
+      "accounts": 169,
+      "customers": 151,
+      "defaults": 26,
+      "default_rate": 0.1538,
+      "exposure": 1295456.61
+    },
+    {
+      "region": "South",
+      "employment_type": "Self-Employed",
+      "loan_type": "Mortgage",
+      "accounts": 78,
+      "customers": 78,
+      "defaults": 20,
+      "default_rate": 0.2564,
+      "exposure": 16396765.49
+    },
+    {
+      "region": "South",
+      "employment_type": "Self-Employed",
+      "loan_type": "Personal Loan",
+      "accounts": 286,
+      "customers": 244,
+      "defaults": 47,
+      "default_rate": 0.1643,
+      "exposure": 4479415.07
+    },
+    {
+      "region": "South",
+      "employment_type": "Unemployed",
+      "loan_type": "Auto Loan",
+      "accounts": 20,
+      "customers": 20,
+      "defaults": 5,
+      "default_rate": 0.25,
+      "exposure": 568973.09
+    },
+    {
+      "region": "South",
+      "employment_type": "Unemployed",
+      "loan_type": "Business Loan",
+      "accounts": 12,
+      "customers": 12,
+      "defaults": 6,
+      "default_rate": 0.5,
+      "exposure": 681407.98
+    },
+    {
+      "region": "South",
+      "employment_type": "Unemployed",
+      "loan_type": "Credit Card",
+      "accounts": 49,
+      "customers": 43,
+      "defaults": 20,
+      "default_rate": 0.4082,
+      "exposure": 390577.68
+    },
+    {
+      "region": "South",
+      "employment_type": "Unemployed",
+      "loan_type": "Mortgage",
+      "accounts": 16,
+      "customers": 14,
+      "defaults": 10,
+      "default_rate": 0.625,
+      "exposure": 3629951.8
+    },
+    {
+      "region": "South",
+      "employment_type": "Unemployed",
+      "loan_type": "Personal Loan",
+      "accounts": 44,
+      "customers": 37,
+      "defaults": 7,
+      "default_rate": 0.1591,
+      "exposure": 762597.59
+    },
+    {
+      "region": "West",
+      "employment_type": "Business Owner",
+      "loan_type": "Auto Loan",
+      "accounts": 72,
+      "customers": 66,
+      "defaults": 9,
+      "default_rate": 0.125,
+      "exposure": 2059239.93
+    },
+    {
+      "region": "West",
+      "employment_type": "Business Owner",
+      "loan_type": "Business Loan",
+      "accounts": 30,
+      "customers": 28,
+      "defaults": 5,
+      "default_rate": 0.1667,
+      "exposure": 2346796.99
+    },
+    {
+      "region": "West",
+      "employment_type": "Business Owner",
+      "loan_type": "Credit Card",
+      "accounts": 84,
+      "customers": 77,
+      "defaults": 13,
+      "default_rate": 0.1548,
+      "exposure": 723201.21
+    },
+    {
+      "region": "West",
+      "employment_type": "Business Owner",
+      "loan_type": "Mortgage",
+      "accounts": 24,
+      "customers": 23,
+      "defaults": 5,
+      "default_rate": 0.2083,
+      "exposure": 4905157.18
+    },
+    {
+      "region": "West",
+      "employment_type": "Business Owner",
+      "loan_type": "Personal Loan",
+      "accounts": 126,
+      "customers": 108,
+      "defaults": 15,
+      "default_rate": 0.119,
+      "exposure": 1992767.74
+    },
+    {
+      "region": "West",
+      "employment_type": "Contract",
+      "loan_type": "Auto Loan",
+      "accounts": 59,
+      "customers": 54,
+      "defaults": 10,
+      "default_rate": 0.1695,
+      "exposure": 1569886.39
+    },
+    {
+      "region": "West",
+      "employment_type": "Contract",
+      "loan_type": "Business Loan",
+      "accounts": 25,
+      "customers": 25,
+      "defaults": 4,
+      "default_rate": 0.16,
+      "exposure": 1588589.07
+    },
+    {
+      "region": "West",
+      "employment_type": "Contract",
+      "loan_type": "Credit Card",
+      "accounts": 91,
+      "customers": 81,
+      "defaults": 14,
+      "default_rate": 0.1538,
+      "exposure": 715146.1
+    },
+    {
+      "region": "West",
+      "employment_type": "Contract",
+      "loan_type": "Mortgage",
+      "accounts": 27,
+      "customers": 26,
+      "defaults": 9,
+      "default_rate": 0.3333,
+      "exposure": 6355009.45
+    },
+    {
+      "region": "West",
+      "employment_type": "Contract",
+      "loan_type": "Personal Loan",
+      "accounts": 116,
+      "customers": 106,
+      "defaults": 14,
+      "default_rate": 0.1207,
+      "exposure": 1695358.72
+    },
+    {
+      "region": "West",
+      "employment_type": "Salaried",
+      "loan_type": "Auto Loan",
+      "accounts": 281,
+      "customers": 258,
+      "defaults": 28,
+      "default_rate": 0.0996,
+      "exposure": 7791307.41
+    },
+    {
+      "region": "West",
+      "employment_type": "Salaried",
+      "loan_type": "Business Loan",
+      "accounts": 130,
+      "customers": 125,
+      "defaults": 21,
+      "default_rate": 0.1615,
+      "exposure": 8601924.3
+    },
+    {
+      "region": "West",
+      "employment_type": "Salaried",
+      "loan_type": "Credit Card",
+      "accounts": 369,
+      "customers": 343,
+      "defaults": 55,
+      "default_rate": 0.1491,
+      "exposure": 3001840.94
+    },
+    {
+      "region": "West",
+      "employment_type": "Salaried",
+      "loan_type": "Mortgage",
+      "accounts": 131,
+      "customers": 128,
+      "defaults": 28,
+      "default_rate": 0.2137,
+      "exposure": 28262801.14
+    },
+    {
+      "region": "West",
+      "employment_type": "Salaried",
+      "loan_type": "Personal Loan",
+      "accounts": 510,
+      "customers": 446,
+      "defaults": 76,
+      "default_rate": 0.149,
+      "exposure": 7630696.93
+    },
+    {
+      "region": "West",
+      "employment_type": "Self-Employed",
+      "loan_type": "Auto Loan",
+      "accounts": 114,
+      "customers": 108,
+      "defaults": 12,
+      "default_rate": 0.1053,
+      "exposure": 3243274.79
+    },
+    {
+      "region": "West",
+      "employment_type": "Self-Employed",
+      "loan_type": "Business Loan",
+      "accounts": 53,
+      "customers": 51,
+      "defaults": 5,
+      "default_rate": 0.0943,
+      "exposure": 3767394.04
+    },
+    {
+      "region": "West",
+      "employment_type": "Self-Employed",
+      "loan_type": "Credit Card",
+      "accounts": 165,
+      "customers": 150,
+      "defaults": 26,
+      "default_rate": 0.1576,
+      "exposure": 1406687.19
+    },
+    {
+      "region": "West",
+      "employment_type": "Self-Employed",
+      "loan_type": "Mortgage",
+      "accounts": 56,
+      "customers": 54,
+      "defaults": 16,
+      "default_rate": 0.2857,
+      "exposure": 12006574.95
+    },
+    {
+      "region": "West",
+      "employment_type": "Self-Employed",
+      "loan_type": "Personal Loan",
+      "accounts": 239,
+      "customers": 199,
+      "defaults": 35,
+      "default_rate": 0.1464,
+      "exposure": 3362739.76
+    },
+    {
+      "region": "West",
+      "employment_type": "Unemployed",
+      "loan_type": "Auto Loan",
+      "accounts": 34,
+      "customers": 31,
+      "defaults": 6,
+      "default_rate": 0.1765,
+      "exposure": 941160.35
+    },
+    {
+      "region": "West",
+      "employment_type": "Unemployed",
+      "loan_type": "Business Loan",
+      "accounts": 24,
+      "customers": 23,
+      "defaults": 6,
+      "default_rate": 0.25,
+      "exposure": 1771149.58
+    },
+    {
+      "region": "West",
+      "employment_type": "Unemployed",
+      "loan_type": "Credit Card",
+      "accounts": 48,
+      "customers": 45,
+      "defaults": 17,
+      "default_rate": 0.3542,
+      "exposure": 337921.88
+    },
+    {
+      "region": "West",
+      "employment_type": "Unemployed",
+      "loan_type": "Mortgage",
+      "accounts": 17,
+      "customers": 17,
+      "defaults": 7,
+      "default_rate": 0.4118,
+      "exposure": 4053724.14
+    },
+    {
+      "region": "West",
+      "employment_type": "Unemployed",
+      "loan_type": "Personal Loan",
+      "accounts": 52,
+      "customers": 47,
+      "defaults": 19,
+      "default_rate": 0.3654,
+      "exposure": 771491.43
+    }
+  ],
   "insights": [
     {
       "title": "Mortgage carries the highest default rate",

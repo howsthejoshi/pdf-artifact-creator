@@ -78,6 +78,18 @@ def build_facts(panel: pd.DataFrame) -> dict:
     facts["cross_income_employment"] = json.loads(
         income_emp[income_emp["accounts"] >= 80].round(4).to_json(orient="records")
     )
+    triple = (
+        panel.groupby(["region", "employment_type", "loan_type"], dropna=False)
+        .agg(
+            accounts=("account_id", "count"),
+            customers=("customer_id", "nunique"),
+            defaults=("target_default", "sum"),
+            default_rate=("target_default", "mean"),
+            exposure=("exposure", "sum"),
+        )
+        .reset_index()
+    )
+    facts["cross_region_employment_loan_type"] = json.loads(triple.round(4).to_json(orient="records"))
     return facts
 
 

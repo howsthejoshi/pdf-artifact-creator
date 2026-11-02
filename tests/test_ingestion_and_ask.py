@@ -104,6 +104,17 @@ def test_ask_uses_facts_and_declines_unknown():
     assert miss["declined"] is True
 
 
+def test_salaried_business_loan_by_region():
+    from src.ask_portfolio import answer_local, load_facts
+
+    facts = load_facts()
+    hit = answer_local("which region has most number of salaried employees having a business loan", facts)
+    assert hit["declined"] is False
+    assert hit["answer"].startswith("South")
+    assert "207" in hit["answer"]
+    assert "214" in hit["answer"]
+
+
 def test_graph_declines_gdp_and_answers_loan_type():
     hit = run_ask("Which loan type has the highest default rate?")
     assert hit["declined"] is False
