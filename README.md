@@ -6,7 +6,7 @@ Working take-home (v2): ingest the five provided bank tables, profile the book, 
 |---|---|
 | **GitHub** | https://github.com/howsthejoshi/pdf-artifact-creator |
 | **Hosted app** | Streamlit Community Cloud, deployed from that GitHub `main` branch, entry file `app/app.py` |
-| **Docs** | [`docs/architecture.pdf`](docs/architecture.pdf) · [`docs/solution_overview.pdf`](docs/solution_overview.pdf) · [`docs/demo_walkthrough_script.pdf`](docs/demo_walkthrough_script.pdf) |
+| **Docs** | [`docs/architecture.pdf`](docs/architecture.pdf) · [`docs/solution_overview.pdf`](docs/solution_overview.pdf) |
 
 Open the **Cloud app URL** from https://share.streamlit.io (your app’s `*.streamlit.app` link). That is the submission hosted dashboard — not localhost.
 
@@ -82,7 +82,6 @@ Cross-join questions are planned in `src/cross_query.py` against `analysis_panel
 | Dashboard | `app/app.py` |
 | Architecture (1 page) | `docs/architecture.pdf` |
 | Solution overview (1 page) | `docs/solution_overview.pdf` |
-| Demo video script | `docs/demo_walkthrough_script.pdf` |
 | Tests | `tests/` |
 
 `repayment_history.csv` is the monthly tape (176,220 rows) in `data/raw/` with the other four CSVs. Sample grounded Q&A: `sample_output/ask_portfolio_example.json`.

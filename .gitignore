@@ -5,4 +5,5 @@ __pycache__/
 .streamlit/secrets.toml
 *.pyc
 agent-tools/
+docs/demo_walkthrough_script.pdf
 data/processed/anomaly_decisions.json
